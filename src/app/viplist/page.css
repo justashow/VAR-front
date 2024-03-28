@@ -1,0 +1,31 @@
+.VipList {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  height: 100 dvh;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 1280px;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.ListWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.ListSearchBar {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+}
+/* 
+.main {
+  width: 980;
+  height: 100dvh;
+  align-items: center;
+} */

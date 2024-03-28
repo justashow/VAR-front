@@ -1,0 +1,43 @@
+.AuctionWrapper {
+  display: flex;
+  flex-direction: column;
+  padding-right: 10px;
+  border: 1px solid red;
+}
+
+.AuctionContainer {
+  width: 270px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.AuctionProfile {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  border: 1px solid black;
+}
+.AuctionTitle {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  border: 1px solid black;
+}
+
+.AuctionInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 200px;
+}
+
+.AuctionFigure {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  border: 1px solid black;
+}

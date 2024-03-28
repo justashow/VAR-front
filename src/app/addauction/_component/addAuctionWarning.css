@@ -1,0 +1,37 @@
+.AddAuctionBoard {
+  margin-top: 20px;
+}
+
+.AddAuctionContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.AddAuctionTitle {
+  margin: 50px 0;
+  font-size: 80px;
+}
+
+.AddAuctionSelect {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+}
+
+.AddAuctionText {
+  margin-top: 10px;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  border: 1px solid #000;
+  color: red;
+}
+
+.AddAuctionText li {
+  list-style: none;
+  text-align: center;
+}

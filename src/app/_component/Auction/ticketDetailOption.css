@@ -1,0 +1,36 @@
+.AuctionInfo_TicketBox_Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 270px;
+  height: 270px;
+  border: 1px solid black;
+}
+
+.AuctionInfo_box_TimeOut {
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+}
+.AuctionInfo_TicketBox_User {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+  justify-content: baseline;
+}
+.AuctionInfo_TicketBox_User div {
+  margin-right: 10px;
+}
+
+.AuctionInfo_TicketBox_Info {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  width: 200px;
+}
+
+.AuctionInfo_TicketBox_MaxBid {
+  border: 1px solid black;
+}
