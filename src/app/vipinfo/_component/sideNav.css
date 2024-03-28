@@ -1,0 +1,47 @@
+.SideNavContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 900px;
+  width: 300px;
+  background-color: aqua;
+}
+.SideNavWarp {
+  border: 1px solid black;
+  border-radius: 10px;
+  align-self: center;
+  width: 100%;
+}
+.SideNavProfile {
+  display: flex;
+  flex-direction: row;
+}
+
+.SideNav1st {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.ProfileInfo div {
+  margin-top: 10px;
+}
+
+.SideButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Following_btn {
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.VIPCheck {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+}

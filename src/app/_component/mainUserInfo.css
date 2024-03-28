@@ -1,0 +1,25 @@
+.MainUserInfoContainer {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  align-items: center;
+  height: 200px;
+}
+
+.ProfilePicContainer {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+}
+
+.PointContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.UserOptionContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}

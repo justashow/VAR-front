@@ -1,0 +1,39 @@
+.SideNavContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 900px;
+  width: 300px;
+  background-color: aqua;
+}
+
+.SideNavProfile {
+  display: flex;
+  flex-direction: row;
+}
+
+.SideNav1st {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ProfileInfo div {
+  margin-top: 10px;
+}
+
+.SideButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SideButton button {
+  margin-top: 10px;
+}
+
+.VIPCheck {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+}

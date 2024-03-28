@@ -1,0 +1,12 @@
+.VIPFallowList {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.VIPFallowContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+}
