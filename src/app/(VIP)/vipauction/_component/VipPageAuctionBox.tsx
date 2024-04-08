@@ -1,11 +1,12 @@
-import AuctionBox from "@/app/_component/Auction/AuctionBox";
-import "./vipPageAuctionBox.css";
+// import AuctionBox from "@/app/_component/Auction/AuctionBox";
+import styles from "./vipPageAuctionBox.module.css";
 
 const VipPageAuctionBox = () => {
   return (
     <div>
-      <div className="auctionWrapper">
-        <div className="auctionContainer">
+      <div className={styles.auctionWrapper}>
+        <div className={styles.auctionContainer}>
+          {/* <AuctionBox />
           <AuctionBox />
           <AuctionBox />
           <AuctionBox />
@@ -14,8 +15,7 @@ const VipPageAuctionBox = () => {
           <AuctionBox />
           <AuctionBox />
           <AuctionBox />
-          <AuctionBox />
-          <AuctionBox />
+          <AuctionBox /> */}
         </div>
       </div>
     </div>

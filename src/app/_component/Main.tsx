@@ -2,27 +2,27 @@
 
 import Image from "next/image";
 import CarouselMain from "./Carousel/CarouselMain";
-import "./main.css";
+import styles from "./main.module.css";
 import banner from "../../../public/banner.jpg";
 import MainUserInfo from "./MainUserInfo";
 
 const Main = () => {
   return (
-    <div className="MainContainer">
-      <div className="MainBannerContainer">
-        <div className="MainBanner">
-          <Image src={banner} alt="banner" layout="fill" objectFit="cover" />
+    <div className={styles.MainContainer}>
+      <div className={styles.MainBannerContainer}>
+        <div className={styles.MainBanner}>
+          <Image src={banner} alt="banner" priority />
         </div>
       </div>
-      <div className="SecondSection">
-        <div className="MainCarousel">
+      <div className={styles.SecondSection}>
+        <div className={styles.MainCarousel}>
           <CarouselMain />
         </div>
-        <div className="MainUser">
+        <div className={styles.MainUser}>
           <MainUserInfo />
         </div>
       </div>
-      <div className="MainAbout">
+      <div className={styles.MainAbout}>
         <div>Main 디자인</div>
       </div>
     </div>

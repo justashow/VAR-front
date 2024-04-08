@@ -1,9 +1,9 @@
 import Link from "next/link";
-import "../Menu/vipPageMenu.css";
+import styles from "./vipPageMenu.module.css";
 
 const VipPageMenu = () => {
   return (
-    <div className="MenuContainer">
+    <div className={styles.MenuContainer}>
       <Link href="/vipmypage">
         <button className="btn-basic">PR</button>
       </Link>

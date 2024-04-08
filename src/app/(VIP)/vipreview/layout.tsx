@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import "./layout.css";
+import styles from "./layout.module.css";
 import Navbar from "@/app/_component/Nav/Navbar";
 import SideNav from "@/app/_component/Nav/SideNav";
 
@@ -13,23 +13,23 @@ export default function Layout({
 }) {
   return (
     <div>
-      <div className="NavMenuContainer">
+      <div className={styles.NavMenuContainer}>
         <nav>
           <Navbar />
         </nav>
       </div>
-      <div className="container">
-        <header className="leftSectionWrapper">
-          <section className="leftSection">
-            <div className="leftSectionFixed">
+      <div className={styles.container}>
+        <header className={styles.leftSectionWrapper}>
+          <section className={styles.leftSection}>
+            <div className={styles.leftSectionFixed}>
               <nav>
                 <SideNav />
               </nav>
             </div>
           </section>
         </header>
-        <div className="rightSectionWrapper">
-          <main className="main"> {children}</main>
+        <div className={styles.rightSectionWrapper}>
+          <main className={styles.main}> {children}</main>
         </div>
 
         {/* {modal} */}

@@ -1,6 +1,6 @@
 "use client";
 
-import "./ticketDetailOption.css";
+import styles from "./ticketDetailOption.module.css";
 import Link from "next/link";
 import { StaticImageData } from "next/image";
 
@@ -42,7 +42,7 @@ const TicketDetailOption = ({ user }: Props) => {
 
   return (
     <div>
-      <div className="AuctionInfo_TicketBox_Container">
+      <div className={styles.AuctionInfo_TicketBox_Container}>
         <div>일시: {user.sub}</div>
         <div>장소: {user.address}</div>
         <div>VIP: {user.nickname}</div>

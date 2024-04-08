@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import "./carousel.css";
+// import "./carousel.css";
 import React, { useEffect } from "react";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
@@ -16,7 +16,7 @@ const Carousel = () => {
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
       direction: "horizontal",
-      loop: true,
+      loop: false,
       pagination: {
         el: ".swiper-pagination",
       },
@@ -34,16 +34,16 @@ const Carousel = () => {
     <div className="swiper">
       <div className="swiper-wrapper">
         <div className="swiper-slide">
-          <Image src={Img1} alt="slide1" />
+          <Image src={Img1} alt="slide1" priority />
         </div>
         <div className="swiper-slide">
-          <Image src={Img2} alt="slide2" />
+          <Image src={Img2} alt="slide2" priority />
         </div>
         <div className="swiper-slide">
-          <Image src={Img3} alt="slide3" />
+          <Image src={Img3} alt="slide3" priority />
         </div>
         <div className="swiper-slide">
-          <Image src={Img4} alt="slide4" />
+          <Image src={Img4} alt="slide4" priority />
         </div>
       </div>
       <div className="swiper-pagination"></div>

@@ -1,7 +1,7 @@
 "use client";
 
 import VipPageMenu from "@/app/_component/Menu/VipPageMenu";
-import "./vipPr.css";
+import styles from "./vipPr.module.css";
 import { useState } from "react";
 
 const pr = {
@@ -22,7 +22,7 @@ const VipPr = () => {
     // 여기에 필요한 경우 prContent를 서버에 저장하는 로직을 추가할 수 있습니다.
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: any) => {
     setPrContent(event.target.value);
   };
 
@@ -31,18 +31,18 @@ const VipPr = () => {
       <div>
         <VipPageMenu />
       </div>
-      <div className="VipPrContainer">
+      <div className={styles.VipPrContainer}>
         {isEditing ? (
           <textarea
-            className="VipPrTextarea"
+            className={styles.VipPrTextarea}
             value={prContent}
             onChange={handleChange}
           />
         ) : (
-          <p className="VipPrText">{prContent}</p>
+          <p className={styles.VipPrText}>{prContent}</p>
         )}
       </div>
-      <div className="PrButtonContainer">
+      <div className={styles.PrButtonContainer}>
         {isEditing ? (
           <button className="btn-basic" onClick={handleSave}>
             저장

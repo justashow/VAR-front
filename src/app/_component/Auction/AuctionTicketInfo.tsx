@@ -1,5 +1,5 @@
 "use client";
-import "./auctionTicketInfo.css";
+import styles from "./auctionTicketInfo.module.css";
 import Image from "next/image";
 import ProfilePic from "../../../../public/user.png";
 import { useEffect, useState } from "react";
@@ -51,14 +51,14 @@ const AuctionTicketInfo = () => {
 
   return (
     <div>
-      <div className="AuctionInfoContainer">
-        <div className="AuctionInfo-Info">
-          <div className="AuctionInfo-Pic">
+      <div className={styles.AuctionInfoContainer}>
+        <div className={styles.AuctionInfoInfo}>
+          <div className={styles.AuctionInfoPic}>
             <Link href="/vipinfo">
               <Image src={user.profile} alt="ProfilePic" />
             </Link>
           </div>
-          <article className="AuctionInfoBoxFixed">
+          <article className={styles.AuctionInfoBoxFixed}>
             <TicketDetailOption user={user} />
           </article>
         </div>

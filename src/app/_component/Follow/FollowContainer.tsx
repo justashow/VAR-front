@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from "next/image";
-import "../Follow/followContainer.css";
+import styles from "./followContainer.module.css";
 
 //타입스크립트 타입지정 부분
 type Props = {
@@ -14,8 +14,8 @@ type Props = {
 
 const FollowContainer = ({ user }: Props) => {
   return (
-    <div className="VIPFallowList">
-      <div className="VIPFallowContainer">
+    <div className={styles.VIPFallowList}>
+      <div className={styles.VIPFallowContainer}>
         <div>
           <Image src={user.profile} alt="ProfilePic" width={40} />
         </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import MyPageAuctionBox from "./VipPageAuctionBox";
 
-import "./vipPageAuction.css";
+import styles from "./vipPageAuction.module.css";
 import VipPageMenu from "@/app/_component/Menu/VipPageMenu";
 
 const VipPageAuction = () => {
@@ -10,8 +10,8 @@ const VipPageAuction = () => {
       <div>
         <VipPageMenu />
       </div>
-      <div className="Auction-menu">
-        <div className="Auction-btn">
+      <div className={styles["Auction-menu"]}>
+        <div className={styles["Auction-btn"]}>
           <Link href="/vipauction/proceeding">
             <button className="btn-basic">참여중인 경매</button>
           </Link>
