@@ -1,15 +1,21 @@
 "use client";
 
 import Image from "next/image";
-import "./navbar.css";
+import styles from "./navbar.module.css";
 import Link from "next/link";
 import Logo from "../../../../public/Logo.png";
 import Modal from "react-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import VipApplyModal from "../VipApply/VipApplyModal";
+import { useUser } from "@/app/utils/UserProvider";
+// import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
+  const { isLoggedIn, logout } = useUser();
+
   const [isOpen, setIsOpen] = useState<boolean>(false); //추가
+  const [isVip, setIsVip] = useState(false); // VIP 상태
+
   // 모달을 닫는 함수
   const closeModal = () => {
     setIsOpen(false);
@@ -20,14 +26,17 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  // // 로그아웃 처리 함수
+  // const handleLogout = () => {
+  //   // signOut();
+  // };
   return (
-    <div className="NavContainer">
+    <div className={styles.NavContainer}>
       <Link href="/">
-        <Image src={Logo} alt="Logo" height={40} />
+        <Image src={Logo} alt="Logo" height={40} priority />
       </Link>
-      <div className="NavMenu">
-        <div onClick={toggle}>VIP Apply</div>
-
+      <div className={styles.NavMenu}>
+        {isLoggedIn && !isVip && <div onClick={toggle}>VIP Apply</div>}
         <div>
           <Link href="/auctions/original">Auction </Link>
         </div>
@@ -38,7 +47,7 @@ const Navbar = () => {
           <Link href="/viplist">Vip List </Link>
         </div>
       </div>
-      <div className="NavMenu2">
+      <div className={styles.NavMenu2}>
         <div>
           <Link href="/usermypage">My Page </Link>
         </div>
@@ -46,16 +55,24 @@ const Navbar = () => {
         <div>
           <Link href="/faq">FAQ </Link>
         </div>
-        <div>로그아웃</div>
+        <div>
+          {isLoggedIn ? (
+            // 로그인 상태일 때 로그아웃 버튼 표시
+            <div onClick={logout}>로그아웃</div>
+          ) : (
+            // 로그인 상태가 아닐 때 로그인 버튼 표시
+            <Link href="/login">로그인</Link>
+          )}
+        </div>
       </div>
       <Modal
-        className="modal-content"
+        className={styles.modalContent}
         isOpen={isOpen}
         onRequestClose={closeModal}
         ariaHideApp={false}
-        overlayClassName="modal-overlay"
+        overlayClassName={styles.modalOverlay}
       >
-        <div className="modal-inner-content">
+        <div className={styles.modalInnerContent}>
           <VipApplyModal closeModal={closeModal} />
         </div>
       </Modal>

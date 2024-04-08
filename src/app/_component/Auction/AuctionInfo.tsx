@@ -1,5 +1,5 @@
 "use client";
-import "./auctionInfo.css";
+import styles from "./auctionInfo.module.css";
 import Image from "next/image";
 import ProfilePic from "../../../../public/user.png";
 import AuctionInfo_box from "./AuctionInfo_box";
@@ -50,14 +50,14 @@ const AuctionInfo = () => {
 
   return (
     <div>
-      <div className="AuctionInfoContainer">
-        <div className="AuctionInfo-Info">
-          <div className="AuctionInfo-Pic">
+      <div className={styles.AuctionInfoContainer}>
+        <div className={styles["AuctionInfo-Info"]}>
+          <div className={styles["AuctionInfo-Pic"]}>
             <Link href="/vipinfo">
               <Image src={user.profile} alt="ProfilePic" />
             </Link>
           </div>
-          <article className="AuctionInfoBoxFixed">
+          <article className={styles.AuctionInfoBoxFixed}>
             <AuctionInfo_box user={user} />
           </article>
         </div>

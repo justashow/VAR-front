@@ -16,7 +16,7 @@ const CarouselMain = () => {
   useEffect(() => {
     const swiper = new Swiper(".swiper", {
       direction: "horizontal",
-      loop: true,
+      loop: false,
       pagination: {
         el: ".swiper-pagination",
       },
@@ -31,29 +31,26 @@ const CarouselMain = () => {
   }, []);
 
   return (
-    <div className="swiper-container">
-      <div className="swiper">
-        <div className="swiper-wrapper">
-          <div className="swiper-slide">
-            <Image src={Img1} alt="slide1" fill />
-          </div>
-          <div className="swiper-slide">
-            <Image src={Img2} alt="slide2" fill />
-          </div>
-          <div className="swiper-slide">
-            <Image src={Img3} alt="slide3" fill />
-          </div>
-          <div className="swiper-slide">
-            <Image src={Img4} alt="slide4" fill />
-          </div>
+    <div className="swiper">
+      <div className="swiper-wrapper">
+        <div className="swiper-slide">
+          <Image src={Img1} alt="slide1" priority />
         </div>
-        <div className="swiper-pagination"></div>
-        <div className="swiper-button-prev"></div>
-        <div className="swiper-button-next"></div>
-        <div className="swiper-scrollbar"></div>
+        <div className="swiper-slide">
+          <Image src={Img2} alt="slide2" priority />
+        </div>
+        <div className="swiper-slide">
+          <Image src={Img3} alt="slide3" priority />
+        </div>
+        <div className="swiper-slide">
+          <Image src={Img4} alt="slide4" priority />
+        </div>
       </div>
+      <div className="swiper-pagination"></div>
+      <div className="swiper-button-prev"></div>
+      <div className="swiper-button-next"></div>
+      <div className="swiper-scrollbar"></div>
     </div>
   );
 };
-
 export default CarouselMain;

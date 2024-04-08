@@ -1,7 +1,7 @@
 "use client";
 
 import VipPageMenu from "@/app/_component/Menu/VipPageMenu";
-import "./vipPr.css";
+import styles from "./vipPr.module.css";
 import { useState } from "react";
 
 const pr = {
@@ -31,18 +31,18 @@ const VipPr = () => {
       <div>
         <VipPageMenu />
       </div>
-      <div className="VipPrContainer">
+      <div className={styles.VipPrContainer}>
         {isEditing ? (
           <textarea
-            className="VipPrTextarea"
+            className={styles.VipPrTextarea}
             value={prContent}
             onChange={handleChange}
           />
         ) : (
-          <p className="VipPrText">{prContent}</p>
+          <p className={styles.VipPrText}>{prContent}</p>
         )}
       </div>
-      <div className="PrButtonContainer">
+      <div className={styles.PrButtonContainer}>
         {isEditing ? (
           <button className="btn-basic" onClick={handleSave}>
             저장

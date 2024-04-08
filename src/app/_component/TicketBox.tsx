@@ -1,4 +1,4 @@
-import "./ticketBox.css";
+import styles from "./ticketBox.module.css";
 import ProfilePic from "../../../public/user.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,13 +14,13 @@ const user = {
 const TicketBox = () => {
   return (
     <div>
-      <div className="TicketBoxContainer">
-        <div className="ProfilePic">
+      <div className={styles.TicketBoxContainer}>
+        <div className={styles.ProfilePic}>
           <Image src={user.profile} alt="ProfilePic" width={100} />
         </div>
 
         <div>
-          <div className="Profile">
+          <div className={styles.Profile}>
             <h2>{user.nickName}</h2>
             <div>{user.star}</div>
           </div>

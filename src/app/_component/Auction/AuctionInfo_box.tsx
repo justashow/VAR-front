@@ -1,6 +1,6 @@
 "use client";
 
-import "./auctionInfo_box.css";
+import styles from "./auctionInfo_box.module.css";
 import Link from "next/link";
 import Image, { StaticImageData } from "next/image";
 
@@ -36,20 +36,20 @@ const AuctionInfo_box = ({ user }: Props) => {
   //----------------------------------------------------------------
 
   return (
-    <div className="AuctionInfo_box_Container">
-      <div className="AuctionInfo_box_TimeOut">
+    <div className={styles.AuctionInfo_box_Container}>
+      <div className={styles.AuctionInfo_box_TimeOut}>
         남은 시간: {formatTime(user.auctionTime)}
       </div>
-      <div className="AuctionInfo_box_User">
+      <div className={styles.AuctionInfo_box_User}>
         <div>{user.nickname}</div>
         <div>{user.star}</div>
       </div>
-      <div className="AuctionInfo_box_Info">
+      <div className={styles.AuctionInfo_box_Info}>
         <div>날짜: {user.sub}</div>
         <div>장소: {user.address}</div>
         <div>경매기간: {user.period}</div>
       </div>
-      <div className="AuctionInfo_box_MaxBid">
+      <div className={styles.AuctionInfo_box_MaxBid}>
         현재 최고입찰가: {formattedAuctionCurrentBid} 원
       </div>
       <Link href="/auctionInfo">

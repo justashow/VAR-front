@@ -1,9 +1,9 @@
 import Link from "next/link";
-import "../Menu/myPageMenu.css";
+import styles from "./myPageMenu.module.css";
 
 const MyPageMenu = () => {
   return (
-    <div className="MenuContainer">
+    <div className={styles.MenuContainer}>
       <Link href="/usermypage">
         <button className="btn-basic">식사권</button>
       </Link>

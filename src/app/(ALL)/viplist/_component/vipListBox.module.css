@@ -1,0 +1,15 @@
+.ListBoxContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 240px;
+  height: 250px;
+}
+
+.ListBoxContainer img {
+  min-height: 100px; /* 이미지의 최대 높이를 100px로 제한 */
+  object-fit: cover; /* 이미지 비율을 유지하면서 해당 영역을 완전히 채움 */
+}

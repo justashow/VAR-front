@@ -1,0 +1,26 @@
+.VipList {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  height: 100%;
+  padding: 20px;
+  width: 600px;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start; /* 변경됨 */
+}
+
+.ListWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.ListSearchBar {
+  margin: 50px 0;
+  display: flex;
+  justify-content: center;
+}
+.EndMessage {
+  text-align: center; /* 메시지 텍스트를 가운데 정렬 */
+  width: 100%; /* 부모 컨테이너의 전체 너비를 사용 */
+}
