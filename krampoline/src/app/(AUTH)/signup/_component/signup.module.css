@@ -23,6 +23,7 @@
 
 .signup-form label {
   margin-bottom: 5px;
+  color: black;
 }
 
 .signup-form input {
@@ -30,6 +31,7 @@
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  color: black;
 }
 
 .verify-btn {
@@ -39,6 +41,7 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
+  color: black;
 }
 
 .verify-btn-active {

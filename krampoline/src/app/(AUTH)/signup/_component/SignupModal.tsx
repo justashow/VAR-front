@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Logo from "../../../../../public/Logo.png";
+import Logo from "/public/Logo.png";
 import styles from "./signup.module.css";
 import { useUser } from "@/app/utils/UserProvider";
 import axios from "axios";
