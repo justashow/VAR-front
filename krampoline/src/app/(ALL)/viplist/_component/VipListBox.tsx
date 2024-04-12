@@ -24,6 +24,7 @@ const VipListBox = ({ vipBox }: Props) => {
               alt="ProfilePic"
               width={100}
               height={100}
+              unoptimized={true}
             />
           </Link>
         </div>
