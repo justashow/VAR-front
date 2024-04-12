@@ -15,6 +15,7 @@ const nextConfig = {
   //     "loremflickr.com",
   //   ],
   // },
+  output: "standalone",
   reactStrictMode: false,
 };
 
