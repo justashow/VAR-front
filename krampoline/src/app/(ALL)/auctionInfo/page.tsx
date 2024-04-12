@@ -3,7 +3,7 @@
 import React, { MutableRefObject, useRef } from "react";
 import Image from "next/image";
 import AuctionInfo from "../../_component/Auction/AuctionInfo";
-import AuctionInfo_Img from "/public/detailInfo";
+import AuctionInfo_Img from "/public/detailInfo.png";
 import AuctionInfo_warning from "/public/warningList.jpeg";
 import ScrollToTopButton from "../../_component/ScrollToTopButton";
 
