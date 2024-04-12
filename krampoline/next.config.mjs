@@ -9,7 +9,15 @@ const nextConfig = {
   //   return config;
   // },
   images: {
-    domains: ["k.kakaocdn.net"],
+    // domains: ["k.kakaocdn.net"],
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname:"k.kakaocdn.net",
+        port: "",
+        pathname: "/dn/**"
+      }
+    ]
   },
   output: "standalone",
   reactStrictMode: false,
