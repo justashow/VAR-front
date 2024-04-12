@@ -1,0 +1,42 @@
+.ReviewContainer {
+  display: flex;
+  flex-direction: row;
+}
+.ReviewBox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 500px;
+  width: 600px;
+  margin: 5px auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px 30px;
+}
+.ReviewProfile,
+.ReviewProfileExpanded {
+  display: flex;
+  flex-direction: column;
+}
+
+.ReviewInfo {
+  display: flex;
+  flex-direction: row;
+}
+
+.ReviewTitle {
+  width: 250px;
+  white-space: pre-wrap;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  border: 1px solid black;
+}
+
+.ReviewTitle.collapsed {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none;
+}

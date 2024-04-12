@@ -1,0 +1,121 @@
+.AddFormContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.AddFormMoneyContainer {
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+  border-bottom: 0.1px solid rgba(0, 0, 0, 0.2);
+}
+
+.FeePolicy {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.PointInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.MoneyInput {
+  border: 1px solid black;
+}
+
+.PointInfoInput {
+  display: flex;
+  align-items: center;
+}
+
+.PointInfoInput input {
+  flex: 1;
+  padding: 8px 12px;
+  margin-right: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease-in-out;
+}
+
+.PointInfoInput input:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1),
+    0 0 0 2px rgba(74, 144, 226, 0.5);
+}
+
+.PointInfoInput div {
+  font-size: 16px;
+  color: #666;
+}
+.AddFormDateContainer {
+  margin-top: 50px;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+  border-bottom: 0.1px solid rgba(0, 0, 0, 0.2);
+}
+
+.AuthCheck {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.ButtonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.AddFormTextContainer {
+  margin-top: 100px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.TextEditor {
+  height: 300px;
+}
+
+.AddFormAddressContainer {
+  margin-top: 50px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+  gap: 50px;
+  border-bottom: 0.1px solid rgba(0, 0, 0, 0.2);
+}
+
+.PostContainer {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

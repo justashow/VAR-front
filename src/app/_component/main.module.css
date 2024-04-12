@@ -1,0 +1,50 @@
+.MainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1280px;
+  background-color: white;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.MainBannerContainer {
+  width: 100%; /* 원하는 너비 설정 */
+  padding: 50px 0; /* 상단과 하단에 padding 적용 */
+  box-sizing: border-box;
+}
+
+.MainBanner {
+  position: relative;
+  height: 400px; /* 원하는 높이 설정 */
+  width: 100%; /* padding을 포함한 부모 컨테이너의 100% */
+  overflow: hidden;
+}
+
+.SecondSection {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 0 50px 0;
+  align-items: center;
+}
+
+.MainCarousel {
+  width: 700px;
+  background-color: white;
+  height: 200px;
+}
+
+.MainUser {
+  width: 500px;
+  /* background-color: red; */
+  height: 200px;
+}
+
+.MainAbout {
+  height: 1000px;
+  width: 100%;
+  background-color: aqua;
+}

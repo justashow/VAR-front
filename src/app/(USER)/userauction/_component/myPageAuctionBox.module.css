@@ -1,0 +1,17 @@
+.auctionContainer {
+  display: flex;
+  border: 1px solid black;
+  height: 100 dvh;
+  padding-bottom: 33px;
+  padding-top: 33px;
+  width: 600px;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.auctionWrapper {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,35 @@
+.MembershipContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* 좌우 중앙 정렬 */
+  height: 700px;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+
+.MembershipTitleContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.MembershipInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+}
+
+.MembershipTermsContainer {
+  align-items: center;
+  width: 355px;
+  text-align: center;
+}
+
+.MembershipButtonGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}

@@ -1,0 +1,23 @@
+.ReportContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ReportContainer input {
+  border: 1px solid #ccc; /* input 필드 경계선 */
+  padding: 8px 12px; /* 패딩 */
+  width: 80%; /* 너비 설정 */
+  box-sizing: border-box; /* 너비가 패딩과 경계선을 포함하도록 설정 */
+}
+
+.ReportContainer input[type="file"] {
+  border: none; /* 파일 입력 필드의 기본 경계선 제거 */
+  padding: 0; /* 파일 입력 필드의 패딩 제거 */
+}
+
+.ReportContainer input[type="text"] {
+  margin: 10px 0; /* 텍스트 입력 필드의 상하 여백 */
+  height: 100px;
+}
