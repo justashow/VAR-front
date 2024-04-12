@@ -1,5 +1,5 @@
 # Build stage
-FROM krmp-d2hub-idock.9rum.cc/goorm/node:20 AS base
+FROM krmp-d2hub-idock.9rum.cc/goorm/node:21 AS base
 
 
 # Install dependencies only when needed
