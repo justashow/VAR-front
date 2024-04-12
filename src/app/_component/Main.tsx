@@ -3,7 +3,7 @@
 import Image from "next/image";
 import CarouselMain from "./Carousel/CarouselMain";
 import styles from "./main.module.css";
-import banner from "../../../public/banner.jpg";
+import banner from "/banner.jpg";
 import MainUserInfo from "./MainUserInfo";
 
 const Main = () => {
