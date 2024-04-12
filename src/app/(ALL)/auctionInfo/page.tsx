@@ -3,8 +3,8 @@
 import React, { MutableRefObject, useRef } from "react";
 import Image from "next/image";
 import AuctionInfo from "../../_component/Auction/AuctionInfo";
-import AuctionInfo_Img from "/상세정보.png";
-import AuctionInfo_warning from "/주의사항.jpeg";
+import AuctionInfo_Img from "/public/상세정보.png";
+import AuctionInfo_warning from "/public/주의사항.jpeg";
 import ScrollToTopButton from "../../_component/ScrollToTopButton";
 
 const Page = () => {
