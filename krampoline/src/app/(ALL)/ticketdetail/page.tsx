@@ -3,8 +3,8 @@
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Modal from "react-modal";
-import AuctionInfo_Img from "/public/상세정보.png";
-import AuctionInfo_warning from "/public/주의사항.jpeg";
+import AuctionInfo_Img from "../../../../public/상세정보.png";
+import AuctionInfo_warning from "../../../../public/주의사항.jpeg";
 import ScrollToTopButton from "../../_component/ScrollToTopButton";
 import AuctionTicketInfo from "../../_component/Auction/AuctionTicketInfo";
 import TicketDetailMap from "./_component/TicketDetailMap";
