@@ -19,7 +19,7 @@ function MyPage() {
       try {
         // 카카오 OAuth 서버로부터 액세스 토큰을 요청합니다.
         const response = await axios.post(
-          "https://won-backserver.kro.kr:8081/api/auth/oauth2/accessKakao",
+          "https://vipandrendezvous.site/api/auth/oauth2/accessKakao",
           { code },
           { withCredentials: true }
         );

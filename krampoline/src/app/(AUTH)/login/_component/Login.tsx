@@ -11,7 +11,7 @@ export default function Login() {
   const router = useRouter(); // useRouter 훅 사용
   const onClick = () => {
     window.location.href =
-      "https://won-backserver.kro.kr:8081/oauth2/authorization/kakao";
+      "https://vipandrendezvous.site/oauth2/authorization/kakao";
   };
 
   return (
