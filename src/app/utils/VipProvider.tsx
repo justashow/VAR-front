@@ -24,9 +24,12 @@ export function VipProvider({ children }: { children: React.ReactNode }) {
     const token = localStorage.getItem("Authorization");
     setIsLoading(true); // 데이터 로딩 시작 시 true로 설정
     try {
-      const response = await axios.get(`${process.env.BASE_URL}/api/vip/info`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/vip/info`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       if (response.status === 200) {
         console.log(response.data);
         setIsLoading(false);
@@ -48,7 +51,7 @@ export function VipProvider({ children }: { children: React.ReactNode }) {
     setIsLoading(true); // 데이터 로딩 시작 시 true로 설정
     try {
       const response = await axios.patch(
-        `${process.env.BASE_URL}/api/vip/editInfo`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/vip/editInfo`,
         updatedProfile,
         { headers: { Authorization: `Bearer ${token}` } }
       );

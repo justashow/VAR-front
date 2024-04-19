@@ -52,7 +52,7 @@ export function AddAuctionsProvider({
     try {
       const token = localStorage.getItem("Authorization");
       const response = await axios.post(
-        `${process.env.BASE_URL}/api/vip/auction/create`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/vip/auction/create`,
         {
           minBidAmount,
           meetingDate,

@@ -42,7 +42,7 @@ const Page = () => {
         // Make API call with extracted ticketUUID
         const token = localStorage.getItem("Authorization");
         const response = await axios.get(
-          `${process.env.BASE_URL}/api/ticket/${extractedTicketUUID}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/${extractedTicketUUID}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
@@ -111,7 +111,7 @@ const Page = () => {
     try {
       const token = localStorage.getItem("Authorization");
       const response = await axios.patch(
-        `${process.env.EXT_PUBLIC_BASE_URL}/api/ticket/cancel/${ticketUUID}`,
+        `${process.env.EXT_PUBLIC_NEXT_PUBLIC_BASE_URL}/api/ticket/cancel/${ticketUUID}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

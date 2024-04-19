@@ -47,7 +47,7 @@ const Page = () => {
         try {
           const token = localStorage.getItem("Authorization");
           const response = await axios.get(
-            `${process.env.BASE_URL}/api/all/auction/general/${auctionUUID}`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/auction/general/${auctionUUID}`,
             { headers: { Authorization: `Bearer ${token}` } }
           );
           if (response.status === 200) {

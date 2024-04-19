@@ -7,7 +7,7 @@ export async function getAuctionListRecommends({
   searchQuery = "",
   sort = "",
 }) {
-  const url = `${process.env.BASE_URL}/api/all/auction/generalList?page=${pageParam}&size=10&sortType=${sort}&search=${searchQuery}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/auction/generalList?page=${pageParam}&size=10&sortType=${sort}&search=${searchQuery}`;
 
   try {
     const response = await axios.get(url, {

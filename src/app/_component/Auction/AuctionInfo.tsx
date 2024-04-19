@@ -53,7 +53,7 @@ const AuctionInfo = ({ VipInfo, ObjectauctionUUID }) => {
     try {
       const token = localStorage.getItem("Authorization");
       const response = await axios.patch(
-        `${process.env.BASE_URL}/api/vip/auction/cancel/${ObjectauctionUUID}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/vip/auction/cancel/${ObjectauctionUUID}`,
         {},
         { headers: { Authorization: `Bearer ${token}` } }
       );

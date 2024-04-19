@@ -82,7 +82,7 @@ export function ChargePointProvider({
       if (rsp.success) {
         try {
           const response = await axios.post(
-            `${process.env.BASE_URL}/api/payment/point`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/point`,
             {
               imp_uid: rsp.imp_uid,
               merchant_uid: rsp.merchant_uid,
@@ -132,7 +132,7 @@ export function ChargePointProvider({
       if (rsp.success) {
         try {
           const response = await axios.post(
-            `${process.env.BASE_URL}/api/payment/subscribe`,
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/subscribe`,
             {
               imp_uid: rsp.imp_uid,
               merchant_uid: rsp.merchant_uid,
@@ -171,7 +171,7 @@ export function ChargePointProvider({
     if (token) {
       try {
         const response = await axios.post(
-          `${process.env.BASE_URL}/api/payment/exchange`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/payment/exchange`,
           {
             exchangeBank: bank,
             exchangeAccount: accountNumber,

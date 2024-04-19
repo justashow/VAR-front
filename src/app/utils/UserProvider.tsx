@@ -161,7 +161,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   }) {
     try {
       const response = await axios.post(
-        `${process.env.BASE_URL}/api/basic/applyVip`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/basic/applyVip`,
         formData,
         { withCredentials: true }
       );

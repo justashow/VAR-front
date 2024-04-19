@@ -54,7 +54,7 @@ export default function Signup() {
   const VerifyNicknameButton = async () => {
     try {
       const response = await axios.get(
-        `${process.env.BASE_URL}/api/all/duplicate/nickname/${isNickVerified}`
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/duplicate/nickname/${isNickVerified}`
       );
       // API 호출 성공 시, 응답 처리
       console.log("API 호출 결과:", response.data);
@@ -67,7 +67,7 @@ export default function Signup() {
   const VerifyEmailButton = async () => {
     try {
       const response = await axios.post(
-        `${process.env.BASE_URL}/api/all/email/sendAuthCode`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/email/sendAuthCode`,
         {
           email: isEmailVerified,
         }
@@ -83,7 +83,7 @@ export default function Signup() {
   const handleVerifyCode = async () => {
     try {
       const response = await axios.post(
-        `${process.env.BASE_URL}/api/all/email/checkAuthCode`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/email/checkAuthCode`,
         {
           email: isEmailVerified,
           code: verificationCode,
@@ -113,7 +113,7 @@ export default function Signup() {
     try {
       const response = await axios({
         method: "post",
-        url: `${process.env.BASE_URL}/api/all/signup`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/signup`,
         data: body,
         withCredentials: true,
       });

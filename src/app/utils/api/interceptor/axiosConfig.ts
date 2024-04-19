@@ -10,7 +10,7 @@ const setToken = (token) => {
   localStorage.setItem("Authorization", token);
 };
 
-const baseurl = process.env.BASE_URL;
+const baseurl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const HttpAuthInstance = axios.create({
   baseURL: baseurl,

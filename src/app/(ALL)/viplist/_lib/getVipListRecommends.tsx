@@ -12,7 +12,7 @@ export async function getVipListRecommends({
   const encodedSearchQuery = encodeURIComponent(searchQuery);
   const searchPart = encodedSearchQuery ? `&search=${encodedSearchQuery}` : "";
 
-  const url = `${process.env.BASE_URL}/api/all/vipList?page=${pageParam}&size=10${searchPart}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/vipList?page=${pageParam}&size=10${searchPart}`;
 
   try {
     const response = await axios.get(url, {

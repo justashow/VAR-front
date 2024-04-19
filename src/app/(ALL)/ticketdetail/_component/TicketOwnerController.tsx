@@ -161,7 +161,7 @@ const TicketOwnerController = () => {
     try {
       const token = localStorage.getItem("Authorization");
       const response = await axios.get(
-        `${process.env.BASE_URL}/api/ticket/checkTime/${globalTicketUUID}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/checkTime/${globalTicketUUID}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.status === 200) {
@@ -191,7 +191,7 @@ const TicketOwnerController = () => {
       const token = localStorage.getItem("Authorization");
       const currentIsoTime = new Date().toISOString();
       const response = await axios.post(
-        `${process.env.BASE_URL}/api/ticket/checkTime`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/checkTime`,
         { ticketUUID: globalTicketUUID },
         { headers: { Authorization: `Bearer ${token}` } }
       );

@@ -11,7 +11,7 @@ export async function getUserMyPageRecommends({
   searchQuery?: string;
   sort?: string;
 }) {
-  const url = `${process.env.BASE_URL}/api/basic/ticketList?page=${pageParam}&size=10&sortType=${sort}&search=${searchQuery}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/basic/ticketList?page=${pageParam}&size=10&sortType=${sort}&search=${searchQuery}`;
   const token = localStorage.getItem("Authorization");
   console.log(token);
 

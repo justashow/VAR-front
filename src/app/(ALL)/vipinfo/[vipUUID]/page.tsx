@@ -37,7 +37,7 @@ const Page = () => {
         const token = localStorage.getItem("Authorization");
 
         const Allresponse = await axios.get(
-          `${process.env.BASE_URL}/api/all/vipDetail/${vipUUID}`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/vipDetail/${vipUUID}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         if (Allresponse.status === 200) {
@@ -46,7 +46,7 @@ const Page = () => {
         }
 
         const reviewsResponse = await axios.get(
-          `${process.env.BASE_URL}/api/all/review/${vipUUID}?page=1&size=10`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/all/review/${vipUUID}?page=1&size=10`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         if (reviewsResponse.status === 200) {
@@ -56,7 +56,7 @@ const Page = () => {
 
         // 경매 데이터를 가져옵니다.
         const auctionsResponse = await axios.get(
-          `${process.env.BASE_URL}/auction/${vipUUID}/progressList?page=1&size=10`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/auction/${vipUUID}/progressList?page=1&size=10`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         if (auctionsResponse.status === 200) {

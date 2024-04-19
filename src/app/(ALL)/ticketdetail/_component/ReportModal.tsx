@@ -4,9 +4,10 @@ import styles from "./reportModal.module.css";
 import axios from "axios";
 import { useUser } from "@/app/utils/UserProvider";
 
-const REGION = process.env.AWS_S3_BUCKET_REGION; // AWS S3 버킷 리전
-const ACCESS_KEY = process.env.AWS_S3_BUCKET_ACCESS_KEY_ID; // AWS S3 액세스 키
-const SECRET_ACCESS_KEY = process.env.AWS_S3_BUCKET_SECRET_ACCESS_KEY; // AWS S3 비밀 액세스 키
+const REGION = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_REGION; // AWS S3 버킷 리전
+const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_ACCESS_KEY_ID; // AWS S3 액세스 키
+const SECRET_ACCESS_KEY =
+  process.env.NEXT_PUBLIC_AWS_S3_BUCKET_SECRET_ACCESS_KEY; // AWS S3 비밀 액세스 키
 
 const ReportModal = ({ onReportClose }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -66,7 +67,7 @@ const ReportModal = ({ onReportClose }) => {
 
       // API 요청 부분
       const response = await axios.post(
-        `${process.env.BASE_URL}/api/ticket/report`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/report`,
         {
           ticketUUID: globalTicketUUID,
           ticketReportContent: ticketInfo.ticketReportContent,
