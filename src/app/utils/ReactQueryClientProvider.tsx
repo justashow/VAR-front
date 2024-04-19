@@ -21,11 +21,6 @@ export const ReactQueryClientProvider = ({
       })
   );
   return (
-    <QueryClientProvider client={queryClient}>
-      {children}
-      {/* <ReactQueryDevtools
-        initialIsOpen={process.env.NEXT_PUBLIC_MODE === "local"}
-      /> */}
-    </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 };

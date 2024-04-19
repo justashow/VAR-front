@@ -35,3 +35,31 @@
 .AuctionInfo_box_MaxBid {
   border: 1px solid black;
 }
+
+/* 모달 오버레이 스타일 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1050; /* 모달 컨텐츠보다 낮아야 함 */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 모달 콘텐츠 스타일 */
+.modalContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1060; /* 오버레이보다 높아야 함 */
+}
+
+/* 내부 콘텐츠 중앙 정렬을 위한 스타일 */
+.modalInnerContent {
+  display: flex;
+  flex-direction: column;
+  width: 524px;
+  height: 733px;
+}

@@ -1,11 +1,13 @@
+"use client";
+
 import DinnerTicket from "./_component/DinnerTicket";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
-      <DinnerTicket />
+      <DinnerTicket dehydratedState={undefined} />
     </div>
   );
 };
 
-export default page;
+export default Page;

@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import styles from "./pointChargeTerms.module.css";
+import { usePoint } from "@/app/utils/ChargePointProvider";
 
 const TermsItem = ({
   question,
@@ -37,8 +38,9 @@ const TermsItem = ({
 };
 
 const PointChargeOption = () => {
+  const { onClickPayment } = usePoint();
   const [isAgreed, setIsAgreed] = useState(false);
-  const [chargeAmount, setChargeAmount] = useState(""); // 충전 금액 상태 추가
+  const [chargeAmount, setChargeAmount] = useState(0); // 충전 금액 상태 추가
 
   const handleAgree: () => void = () => {
     setIsAgreed(true); // 동의 시 상태 업데이트
@@ -46,7 +48,24 @@ const PointChargeOption = () => {
 
   // 금액 버튼 클릭 시 누적하는 함수. 누적할 때 문자열로 처리
   const handleAddAmount = (amount: number) => {
-    setChargeAmount((prev) => `${Number(prev) + amount}`);
+    setChargeAmount((prev) => prev + amount);
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value) && value >= 0) {
+      setChargeAmount(value);
+    } else {
+      setChargeAmount(0);
+    }
+  };
+
+  const handlePaymentClick = () => {
+    if (chargeAmount > 0 && isAgreed) {
+      onClickPayment(chargeAmount);
+    } else {
+      alert("유효한 금액을 입력하고 약관에 동의해주세요.");
+    }
   };
 
   const Terms = [
@@ -76,6 +95,7 @@ const PointChargeOption = () => {
       ),
     },
   ];
+
   return (
     <div className={styles.ChargePointContainer}>
       <h1>포인트 충전하기</h1>
@@ -95,11 +115,13 @@ const PointChargeOption = () => {
             type="number"
             placeholder="충전은 만원 단위로 가능합니다."
             value={chargeAmount}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              setChargeAmount(e.target.value)
-            }
+            onChange={handleInputChange}
           />
-          <button className="btn-basic" disabled={!isAgreed}>
+          <button
+            className="btn-basic"
+            disabled={!isAgreed || chargeAmount <= 0}
+            onClick={handlePaymentClick}
+          >
             충전하기
           </button>
         </div>

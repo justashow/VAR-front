@@ -1,11 +1,17 @@
+import { UserProvider } from "@/app/utils/UserProvider";
 import WithDrawTerms from "./_component/WithDrawTerms";
+import { ChargePointProvider } from "@/app/utils/ChargePointProvider";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
-      <WithDrawTerms />
+      <ChargePointProvider>
+        <UserProvider>
+          <WithDrawTerms />
+        </UserProvider>
+      </ChargePointProvider>
     </div>
   );
 };
 
-export default page;
+export default Page;

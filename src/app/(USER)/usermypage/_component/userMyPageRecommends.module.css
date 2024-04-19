@@ -1,0 +1,7 @@
+.frame-screen {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+}

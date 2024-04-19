@@ -15,6 +15,7 @@ const VipReview = () => {
           <button className="btn-basic">내가 쓴 리뷰</button>
         </div>
       </div>
+      {/* <ReviewBox />
       <ReviewBox />
       <ReviewBox />
       <ReviewBox />
@@ -23,8 +24,7 @@ const VipReview = () => {
       <ReviewBox />
       <ReviewBox />
       <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
+      <ReviewBox /> */}
       <div>페이지 네이션 이동</div>
     </div>
   );

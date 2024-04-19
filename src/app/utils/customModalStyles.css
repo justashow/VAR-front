@@ -1,0 +1,40 @@
+/* 모달 오버레이 스타일 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999; /* .modal-content보다 낮아야 함 */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* 모달 콘텐츠 스타일 */
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  max-height: 90%;
+  padding: 20px;
+  overflow: auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  z-index: 1000;
+}
+
+/* 내부 콘텐츠 중앙 정렬을 위한 스타일 */
+.modal-inner-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}

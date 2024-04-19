@@ -5,8 +5,22 @@ import ProfilePic from "../../../../public/user.png";
 import AuctionInfo_box from "./AuctionInfo_box";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import axios from "axios";
 
-const AuctionInfo = () => {
+type UserInfo = {
+  auctionCreatedTime: string;
+  currentHighestBidAmount: number;
+  meetingDate: string;
+  meetingInfoText: string;
+  meetingLocation: string;
+  meetingPromiseText: string;
+  vipNickname: string;
+  vipProfileImgUrl: string;
+  vipRating: number;
+  vipUUID: string;
+};
+
+const AuctionInfo = ({ VipInfo, ObjectauctionUUID }) => {
   //----------------------------------------------------------------날짜 형식
   const today = new Date();
   const year = today.getFullYear();
@@ -35,30 +49,49 @@ const AuctionInfo = () => {
     return () => clearInterval(timerId);
   }, []);
 
-  //----------------------------------------------------------------
-
-  const user = {
-    profile: ProfilePic,
-    nickname: "John Ahn",
-    maxBid: 1000000,
-    sub: dateString,
-    star: 4.5,
-    address: "경기도 판교",
-    period: "03-05~03-08",
-    auctionTime: timeLeft,
+  const cancelAuction = async (event) => {
+    try {
+      const token = localStorage.getItem("Authorization");
+      const response = await axios.patch(
+        `${process.env.BASE_URL}/api/vip/auction/cancel/${ObjectauctionUUID}`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200) {
+        console.log(response);
+      } else {
+        console.error("Failed to submit report");
+      }
+    } catch (error) {
+      console.error("Error submitting report:", error);
+    }
   };
+
+  //----------------------------------------------------------------
 
   return (
     <div>
       <div className={styles.AuctionInfoContainer}>
         <div className={styles["AuctionInfo-Info"]}>
           <div className={styles["AuctionInfo-Pic"]}>
-            <Link href="/vipinfo">
-              <Image src={user.profile} alt="ProfilePic" />
+            <Link href={`/vipinfo/${VipInfo.vipUUID}`}>
+              <Image
+                src={VipInfo.vipProfileImgUrl || ProfilePic} // Use a default picture if url is not available
+                alt="AuctionInfo_Img"
+                width={600}
+                height={600}
+              />
             </Link>
           </div>
+          <button
+            onClick={(e) => {
+              cancelAuction(e);
+            }}
+          >
+            경매 취소하기
+          </button>
           <article className={styles.AuctionInfoBoxFixed}>
-            <AuctionInfo_box user={user} />
+            <AuctionInfo_box VipInfo={VipInfo} />
           </article>
         </div>
       </div>

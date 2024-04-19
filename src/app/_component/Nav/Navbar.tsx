@@ -8,13 +8,11 @@ import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import VipApplyModal from "../VipApply/VipApplyModal";
 import { useUser } from "@/app/utils/UserProvider";
-// import { useSession, signOut } from "next-auth/react";
 
 const Navbar = () => {
-  const { isLoggedIn, logout } = useUser();
+  const { isLoggedIn, logout, userInfo } = useUser();
 
   const [isOpen, setIsOpen] = useState<boolean>(false); //추가
-  const [isVip, setIsVip] = useState(false); // VIP 상태
 
   // 모달을 닫는 함수
   const closeModal = () => {
@@ -26,23 +24,24 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  // // 로그아웃 처리 함수
-  // const handleLogout = () => {
-  //   // signOut();
-  // };
+  // 로그아웃 처리 함수
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div className={styles.NavContainer}>
       <Link href="/">
         <Image src={Logo} alt="Logo" height={40} priority />
       </Link>
       <div className={styles.NavMenu}>
-        {isLoggedIn && !isVip && <div onClick={toggle}>VIP Apply</div>}
+        {isLoggedIn && userInfo.userType == "ROLE_BASIC" && (
+          <div onClick={toggle}>VIP Apply</div>
+        )}
         <div>
           <Link href="/auctions/original">Auction </Link>
         </div>
-        <div>
-          <Link href="/auctions/event">Special Auction </Link>
-        </div>
+
         <div>
           <Link href="/viplist">Vip List </Link>
         </div>
@@ -57,8 +56,9 @@ const Navbar = () => {
         </div>
         <div>
           {isLoggedIn ? (
-            // 로그인 상태일 때 로그아웃 버튼 표시
-            <div onClick={logout}>로그아웃</div>
+            <div onClick={handleLogout} style={{ cursor: "pointer" }}>
+              로그아웃
+            </div>
           ) : (
             // 로그인 상태가 아닐 때 로그인 버튼 표시
             <Link href="/login">로그인</Link>

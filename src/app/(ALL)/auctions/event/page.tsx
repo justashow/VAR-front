@@ -5,7 +5,7 @@ import SearchBar from "@/app/_component/SearchBar";
 import Carousel from "@/app/_component/Carousel/Carousel";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <div className={styles.CarouselContainer}>
@@ -56,4 +56,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

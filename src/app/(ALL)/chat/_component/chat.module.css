@@ -29,15 +29,6 @@
   align-self: flex-start;
 }
 
-.message.me {
-  align-self: flex-end;
-  background-color: #a0e7e5; /* 내 메시지 배경색 */
-}
-
-.message.other {
-  background-color: #fab1a0; /* 상대 메시지 배경색 */
-}
-
 .chatFooter {
   display: flex;
   padding: 10px;
@@ -88,4 +79,12 @@
   align-items: center;
   text-align: center;
   height: 100%;
+}
+
+.currentUserMessage {
+  background-color: lightblue; /* Style for current user's messages */
+}
+
+.otherUserMessage {
+  background-color: lightgreen; /* Style for other users' messages */
 }

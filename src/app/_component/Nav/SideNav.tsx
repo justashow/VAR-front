@@ -6,9 +6,12 @@ import styles from "./sideNav.module.css";
 import FollowContainer from "../Follow/FollowContainer";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-// import { signOut, useSession } from "next-auth/react";
+import { useUser } from "@/app/utils/UserProvider";
+import { FollowingUser } from "@/models/FollowingList";
 
 const SideNav = () => {
+  const { userInfo, isLoggedIn, followingList } = useUser();
+  const router = useRouter();
   //----------------------------------------------------------------날짜 형식
   const today = new Date();
   const year = today.getFullYear();
@@ -17,22 +20,13 @@ const SideNav = () => {
   const dateString = year + "-" + month + "-" + day;
   //----------------------------------------------------------------
 
-  // const { data: me } = useSession();
-
-  //----------------------------------------------------------------돈 단위
-  // const formattedAuctionCurrentPoint = me?.user?.point.toLocaleString();
-  //----------------------------------------------------------------
-  const router = useRouter();
-
-  // const onLogout = () => {
-  //   signOut({ redirect: false }).then(() => {
-  //     router.replace("/");
-  //   });
-  // };
-
-  // if (!me?.user) {
-  //   return null;
-  // }
+  if (!isLoggedIn) {
+    return (
+      <div className={styles.MainUserInfoContainer}>
+        <p>로그인을 해주세요.</p>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.sideNavContainer}>
@@ -40,22 +34,30 @@ const SideNav = () => {
         <div className={styles.sideNavProfile}>
           <div className={styles.sideNav1st}>
             <div>
-              {/* <Image src={me.user?.image} alt="ProfilePic" width={100} /> */}
+              <Image
+                src={
+                  userInfo?.profileImgUrl?.startsWith("http")
+                    ? userInfo.profileImgUrl
+                    : ProfilePic
+                }
+                alt="ProfilePic"
+                width={100}
+                height={100}
+              />
             </div>
-            <div>
-              별점
-              {/* {me.user?.star} */}
-            </div>
+            {userInfo.userType === "ROLE_VIP" && (
+              <div className={styles.vipStatus}>VIP</div>
+            )}
+            <div>별점</div>
           </div>
           <div className={styles.profileInfo}>
-            {/* <div>닉네임:{me.user?.id}</div> */}
-            <div>
-              보유 포인트:
-              {/* {formattedAuctionCurrentPoint} */}
-            </div>
+            <div>닉네임:{userInfo.nickname}</div>
+            <div>보유 포인트:{userInfo.point}</div>
             <div>
               구독 만료 일자:
-              {/* {me.user?.sub} */}
+              {userInfo.subscribeExpiration
+                ? userInfo.subscribeExpiration
+                : "구독중인 회원이 아닙니다"}
             </div>
             <Link href="/chargepoint">
               <div>충전하기</div>
@@ -86,11 +88,15 @@ const SideNav = () => {
         좋은 결과를 기대해주세요 ^^
       </div>
       <div>
-        {/* <FollowContainer user={user} />
-        <FollowContainer user={user} />
-        <FollowContainer user={user} />
-        <FollowContainer user={user} />
-        <FollowContainer user={user} /> */}
+        <div>
+          {followingList?.length > 0 ? (
+            followingList.map((vip: FollowingUser) => (
+              <FollowContainer key={vip.followUUID} vipfollwing={vip} />
+            ))
+          ) : (
+            <p>팔로우 목록이 없습니다.</p>
+          )}
+        </div>
       </div>
     </div>
   );

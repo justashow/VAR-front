@@ -10,7 +10,7 @@ const MyPageMenu = () => {
       <Link href="/userreview">
         <button className="btn-basic">리뷰</button>
       </Link>
-      <Link href="/userauction/proceeding">
+      <Link href="/userauction">
         <button className="btn-basic">경매</button>
       </Link>
     </div>

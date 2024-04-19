@@ -1,32 +1,51 @@
 import MyPageMenu from "@/app/_component/Menu/MyPageMenu";
 import styles from "./myPageReview.module.css";
-import ReviewBox from "@/app/_component/ReviewBox";
+import UserReviewRecommends from "./UserReviewRecommends";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { SearchProvider, useSearch } from "./SearchProvider";
+import { getUserReviewRecommends } from "../_lib/getUserReviewRecommends";
+import SortButton from "./SortButton";
 
-const MyPageReview = () => {
+function MyPageReview() {
   return (
     <div>
       <div>
         <MyPageMenu />
       </div>
-      <div className={styles.ReviewMenu}>
-        <div className={styles["Review-btn"]}>
-          <button className="btn-basic">받은 리뷰</button>
-          <button className="btn-basic">내가 쓴 리뷰</button>
-        </div>
-      </div>
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <div>페이지 네이션 이동</div>
+      <HydrationBoundary>
+        <SearchProvider>
+          <div className={styles.ReviewMenu}>
+            <div className={styles["Review-btn"]}>
+              <SortButton />
+            </div>
+          </div>
+          <UserReviewRecommends />
+        </SearchProvider>
+      </HydrationBoundary>
     </div>
   );
-};
+}
+
+export async function getServerSideProps(context) {
+  const { query } = context;
+  const sort = query.sort || "defaultSort";
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["UserMyPageReview", sort],
+    queryFn: () => getUserReviewRecommends({ sort }),
+    initialPageParam: 0,
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 export default MyPageReview;

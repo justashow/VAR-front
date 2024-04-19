@@ -1,23 +1,230 @@
-.TicketBoxContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  min-width: 600px;
-  width: 100%;
-  margin: 5px auto;
-  border: 1px solid black;
+.box {
+  height: 120px;
+  width: 868px;
+}
+
+.box .group {
+  height: 120px;
+  left: 0;
+  top: 0;
+  width: 870px;
+}
+
+.box .overlap-group {
+  background-color: #fafafa;
   border-radius: 10px;
-  padding: 5px 0 5px 0;
+  height: 120px;
+  position: relative;
+  width: 868px;
 }
 
-.ProfilePic {
-  margin: 10px;
+.box .frame {
+  /* align-items: center; */
+  display: inline-flex;
+  gap: 8px;
+  left: 128px;
+  position: absolute;
+  top: 16px;
 }
 
-.Profile {
-  display: flex;
-  flex-direction: row;
+.box .text-wrapper {
+  color: #333333;
+  font-family: "SUIT-ExtraBold", Helvetica;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  line-height: 24px;
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.box .div {
+  height: 18px;
+  margin-right: -2px;
+  position: relative;
+  width: 35.92px;
+}
+
+.box .text-wrapper-2 {
+  color: #333333;
+  font-family: "SUIT-Regular", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  left: 17px;
+  letter-spacing: -0.48px;
+  line-height: 18px;
+  position: absolute;
+  text-decoration: underline;
+  top: 0;
+  white-space: nowrap;
+}
+
+.box .img {
+  height: 12px;
+  left: 0;
+  position: absolute;
+  top: 3px;
+  width: 13px;
+}
+
+.box .text-wrapper-3 {
+  color: #949597;
+  font-family: "SUIT-Regular", Helvetica;
+  font-size: 12px;
+  font-weight: 400;
+  left: 720px;
+  letter-spacing: -0.48px;
+  line-height: 18px;
+  position: absolute;
+  text-align: right;
+  top: 19px;
+  white-space: nowrap;
+}
+
+.box .div-wrapper {
   align-items: center;
-  justify-content: flex-start;
+  background-color: #fff741;
+  border-radius: 3px;
+  display: inline-flex;
+  gap: 10px;
+  justify-content: center;
+  left: 789px;
+  overflow: hidden;
+  padding: 5px 8px;
+  position: absolute;
+  top: 16px;
+}
+
+.box .text-wrapper-4 {
+  color: #333333;
+  font-family: "SUIT-ExtraBold", Helvetica;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: -0.48px;
+  line-height: 12px;
+  margin-top: -0.5px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.box .mask-group {
+  height: 88px;
+  left: 20px;
+  position: absolute;
+  top: 16px;
+  width: 88px;
+}
+
+.box .group-wrapper {
+  height: 22px;
+  left: 128px;
+  position: absolute;
+  top: 59px;
+  width: 137px;
+}
+
+.box .group-2 {
+  height: 22px;
+  position: relative;
+  width: 141px;
+}
+
+.box .text-wrapper-5 {
+  color: #949597;
+  font-family: "SUIT-Bold", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: -0.56px;
+  line-height: 21px;
+  position: absolute;
+  top: 1px;
+  white-space: nowrap;
+}
+
+.box .text-wrapper-6 {
+  color: #333333;
+  font-family: "SUIT-Regular", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 75px;
+  letter-spacing: -0.56px;
+  line-height: 21px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.box .group-3 {
+  height: 21px;
+  left: 128px;
+  position: absolute;
+  top: 83px;
+  width: 720px;
+}
+
+.box .group-4 {
+  height: 21px;
+  position: relative;
+  width: 724px;
+}
+
+.box .text-wrapper-7 {
+  color: #949597;
+  font-family: "SUIT-Bold", Helvetica;
+  font-size: 14px;
+  font-weight: 700;
+  left: 0;
+  letter-spacing: -0.56px;
+  line-height: 21px;
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.box .text-wrapper-8 {
+  color: #333333;
+  font-family: "SUIT-Regular", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 75px;
+  letter-spacing: -0.56px;
+  line-height: 21px;
+  position: absolute;
+  text-align: right;
+  top: 0;
+  white-space: nowrap;
+}
+
+.box .group-5 {
+  height: 21px;
+  left: 652px;
+  position: absolute;
+  top: 0;
+  width: 70px;
+}
+
+.box .text-wrapper-9 {
+  color: #949597;
+  font-family: "SUIT-Regular", Helvetica;
+  font-size: 14px;
+  font-weight: 400;
+  left: 0;
+  letter-spacing: -0.56px;
+  line-height: 21px;
+  position: absolute;
+  text-align: right;
+  top: 0;
+  white-space: nowrap;
+}
+
+.box .arrow-right {
+  height: 16px;
+  left: 52px;
+  position: absolute;
+  top: 2px;
+  width: 16px;
 }

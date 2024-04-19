@@ -1,33 +1,56 @@
 import VipPageMenu from "@/app/_component/Menu/VipPageMenu";
-
+import VipReviewRecommends from "./VipReviewRecommends";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+  useQuery,
+} from "@tanstack/react-query";
+import { SearchProvider, useSearch } from "./SearchProvider";
+import { getVipReviewRecommends } from "../_lib/getVipReviewRecommends";
+import SortButton from "./SortButton";
 import styles from "./vipReview.module.css";
-import ReviewBox from "@/app/_component/ReviewBox";
 
-const VipReview = () => {
+function VipReview() {
   return (
     <div>
-      <div>
-        <VipPageMenu />
-      </div>
-      <div className={styles.ReviewMenu}>
-        <div className={styles["Review-btn"]}>
-          <button className="btn-basic">받은 리뷰</button>
-          <button className="btn-basic">내가 쓴 리뷰</button>
-        </div>
-      </div>
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <ReviewBox />
-      <div>페이지 네이션 이동</div>
+      <HydrationBoundary>
+        <SearchProvider>
+          <div>
+            <VipPageMenu />
+          </div>
+          <div className={styles.ReviewMenu}>
+            <div className={styles["Review-btn"]}></div>
+          </div>
+
+          <div className={styles.ReviewMenu}>
+            <div className={styles["Review-btn"]}>
+              <SortButton />
+            </div>
+          </div>
+          <VipReviewRecommends />
+        </SearchProvider>
+      </HydrationBoundary>
     </div>
   );
-};
+}
+
+export async function getServerSideProps(context) {
+  const { query } = context;
+  const sort = query.sort || "defaultSort";
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["VIPMyPageReview", sort],
+    queryFn: () => getVipReviewRecommends({ sort }),
+    initialPageParam: 0,
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 export default VipReview;

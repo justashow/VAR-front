@@ -1,40 +1,44 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./addAuctionForm.module.css";
 import AdressSearch from "./AdressSearch";
 import DateTimePickerValue from "./DateTimePickerValue";
 import EditorComponent from "./EditorComponent";
 import PositionedPopper from "./PositionedPopper";
-
 import DatePopper from "./DatePopper";
+import { useUser } from "@/app/utils/UserProvider";
+import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
+import EditorComponentWaring from "./EditorComponentWaring";
 
 const AddAuctionForm = () => {
+  const { userInfo, isLoading } = useUser();
+  const {
+    Address,
+    AuctionInfo,
+    WarningInfo,
+    Date,
+    createAuction,
+    Bid,
+    setBid,
+  } = useAddAuction();
+  const [amount, setAmount] = useState();
+
+  console.log(Bid, Address, AuctionInfo, WarningInfo, Date);
+
   const handleFormSubmit = (event: any) => {
-    event.preventDefault();
-    // 폼 제출 로직
+    createAuction(Bid, Date, Address, AuctionInfo, WarningInfo);
   };
 
-  const [enroll_company, setEnroll_company] = useState({
-    address: "",
-  });
-
-  const [popup, setPopup] = useState(false);
-
-  const handleInput = (e: any) => {
-    setEnroll_company({
-      ...enroll_company,
-      [e.target.name]: e.target.value,
-    });
+  const onChangeAmount = (e) => {
+    setBid(e.target.value);
   };
 
-  const handleComplete = (data: any) => {
-    setPopup(!popup);
-  };
+  if (isLoading) return <div>Loading...</div>;
 
   return (
-    <form className={styles.AddFormContainer} onSubmit={handleFormSubmit}>
+    <div className={styles.AddFormContainer}>
       <div className={styles.AddFormMoneyContainer}>
         <div>
           <div className={styles.FeePolicy}>
@@ -43,8 +47,16 @@ const AddAuctionForm = () => {
         </div>
         <div className={styles.PointInfo}>
           <div className={styles.PointInfoInput}>
-            <input />
-            <div>보유 포인트: 100,000</div>
+            <input
+              type="number"
+              onChange={onChangeAmount}
+              value={amount}
+              required
+            />
+            <div>
+              보유 포인트:
+              {userInfo.point}
+            </div>
           </div>
         </div>
       </div>
@@ -67,7 +79,7 @@ const AddAuctionForm = () => {
       <div className={styles.AddFormTextContainer}>
         <div className={styles.TextEditor}>
           <div>이것 만큼은 지켜주세요</div>
-          <EditorComponent />
+          <EditorComponentWaring />
         </div>
       </div>
       <div className={styles.AuthCheck}>
@@ -75,12 +87,12 @@ const AddAuctionForm = () => {
         <span>모든 내용을 이해하였고 동의합니다</span>
       </div>
       <div className={styles.ButtonContainer}>
-        <button className="btn-basic" type="submit">
+        <button className="btn-basic" onClick={handleFormSubmit}>
           경매생성
         </button>
         <button className="btn-basic">취소</button>
       </div>
-    </form>
+    </div>
   );
 };
 

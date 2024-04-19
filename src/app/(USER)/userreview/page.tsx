@@ -1,6 +1,6 @@
 import MyPageReview from "./_component/MyPageReview";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <MyPageReview />
@@ -8,4 +8,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

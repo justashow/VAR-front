@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-// import "./faq.css";
 import styles from "./faq.module.css";
 
 const FaqItem = ({

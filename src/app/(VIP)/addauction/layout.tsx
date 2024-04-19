@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import Navbar from "../../_component/Nav/Navbar";
-
 import styles from "./layout.module.css";
 
 export default function Layout({ children }: { children: ReactNode }) {

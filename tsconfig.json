@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/lib/next-auth/ubdex,ts"
+    "src/lib/next-auth/ubdex,ts",
+    "src/models/KakoInfots"
   ],
   "exclude": ["node_modules"]
 }

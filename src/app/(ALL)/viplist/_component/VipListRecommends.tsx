@@ -21,20 +21,18 @@ export default function VipListRecommends() {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery<ApiResponse, Error>({
-    queryKey: ["VipList", searchQuery], // 쿼리 식별자
+    queryKey: ["VipList", searchQuery],
     queryFn: async ({ pageParam = 0 }) => {
-      // 비동기 함수로 API 호출 및 데이터 반환
       return getVipListRecommends({
         pageParam: pageParam as number,
         searchQuery,
       });
     },
     getNextPageParam: (lastPage) => {
-      // 다음 페이지 번호를 계산하거나, 더 이상 페이지가 없으면 undefined 반환
       const nextPage = lastPage.pageable.pageNumber + 1;
       return nextPage < lastPage.totalPages ? nextPage : undefined;
     },
-    // 초기 페이지 매개변수 설정 (필요한 경우)
+
     initialPageParam: 0,
   });
 

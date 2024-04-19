@@ -8,7 +8,7 @@ export async function getVipListRecommends({
   searchQuery?: string;
 }) {
   const searchPart: string = searchQuery ? `&search=${searchQuery}` : "";
-  const url = `https://won-backserver.kro.kr:8081/api/all/vipList?page=${pageParam}&size=10${searchPart}`;
+  const url = `${process.env.BASE_URL}/api/all/vipList?page=${pageParam}&size=10${searchPart}`;
 
   const res: Response = await fetch(url, {
     headers: {

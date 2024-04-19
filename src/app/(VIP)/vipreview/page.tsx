@@ -1,6 +1,6 @@
 import VipReview from "./_component/VipReview";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <VipReview />
@@ -8,4 +8,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
