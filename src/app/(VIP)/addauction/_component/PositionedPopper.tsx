@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Popper, { PopperPlacementType } from "@mui/material/Popper";
@@ -48,7 +50,9 @@ export default function PositionedPopper() {
       </Popper>
 
       <Grid item>
-        <Button onClick={handleClick("bottom-start")}>수수료 정책보기</Button>
+        <Button onClick={handleClick("bottom-start")}>
+          최소 입찰 금액을 지정해 주세요.
+        </Button>
       </Grid>
     </Box>
   );

@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-const KakaoMapApiKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
+const KakaoMapApiKey = process.env.KAKAO_API_KEY;
 const TicketDetailMap = () => {
   useEffect(() => {
     const kakaoMapScript = document.createElement("script");

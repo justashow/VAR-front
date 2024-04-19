@@ -1,9 +1,9 @@
 export interface VipBox {
-  follow: boolean;
+  vipUUID: string;
   profileImgUrl: string;
   vipNickname: string;
-  vipRate?: number;
-  vipUUID: string;
+  vipRate: number;
+  follow: boolean;
 }
 
 export interface ApiResponse {

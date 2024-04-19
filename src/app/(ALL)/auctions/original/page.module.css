@@ -9,15 +9,15 @@
   display: flex;
   flex-direction: row;
   border: 1px solid black;
-  height: 100 dvh;
+  height: 100%;
   padding-left: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
   width: 1280px;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
-  align-items: baseline;
+
+  justify-content: flex-start; /* 변경됨 */
 }
 
 .AuctionListInfo {
@@ -45,4 +45,9 @@
   margin: 50px 0;
   display: flex;
   justify-content: center;
+}
+.EndMessage {
+  text-align: center; /* 메시지를 가운데 정렬합니다 */
+  margin: 1rem 0; /* 위아래 여백을 줍니다 */
+  /* 필요한 추가 스타일을 여기에 추가하세요 */
 }

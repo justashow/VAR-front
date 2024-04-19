@@ -1,58 +1,160 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import styles from "./chat.module.css";
 import ReportModal from "./ChatReportModal";
 import Modal from "react-modal";
-import { useRouter } from "next/navigation";
+import TicketOwnerController from "../../ticketdetail/_component/TicketOwnerController";
+import { useUser } from "@/app/utils/UserProvider";
+
+// 환경 변수 한 번만 참조하기
+const WS_PROXY = process.env.WS_PROXY;
+
+const useWebSocket = (chatRoomUUID) => {
+  const webSocket = useRef(null);
+  const [chatMessages, setChatMessages] = useState([]);
+
+  useEffect(() => {
+    if (!chatRoomUUID) {
+      console.log("chatRoomUUID is null, not opening WebSocket");
+      return;
+    }
+
+    const token = localStorage.getItem("Authorization");
+    const ws = new WebSocket(`${WS_PROXY}wss/chat`);
+    const enterMsg = {
+      accessToken: token,
+      chatRoomUUID: chatRoomUUID,
+      isChatMessage: false,
+    };
+
+    ws.onopen = () => {
+      console.log("WebSocket Connected");
+      ws.send(JSON.stringify(enterMsg));
+    };
+
+    ws.onmessage = (event) => {
+      const messages = JSON.parse(event.data);
+      setChatMessages((prev) => [
+        ...prev,
+        ...(Array.isArray(messages) ? messages : [messages]),
+      ]);
+    };
+
+    ws.onclose = () => console.log("WebSocket Disconnected");
+    ws.onerror = (error) => console.error("WebSocket Error:", error);
+
+    webSocket.current = ws;
+
+    return () => {
+      console.log("Cleanup function called");
+      ws.close();
+      ws.onmessage = null;
+      ws.onclose = null;
+      ws.onerror = null;
+    };
+  }, [chatRoomUUID]);
+
+  const sendMessage = useCallback((message) => {
+    if (webSocket.current?.readyState === WebSocket.OPEN) {
+      webSocket.current.send(JSON.stringify(message));
+      console.log("message sent");
+    }
+  }, []); // 여기에서 webSocket.current의 변화를 추적할 필요가 없어졌습니다.
+
+  return { chatMessages, sendMessage };
+};
+const Message = ({ message, isCurrentUser }) => {
+  const messageClass = isCurrentUser
+    ? styles.currentUserMessage
+    : styles.otherUserMessage;
+
+  return (
+    <div className={`${styles.message} ${messageClass}`}>
+      <div className={styles.messageSender}>
+        {isCurrentUser ? "나" : message.nickname}
+      </div>
+      <div className={styles.messageContent}>{message.content}</div>
+      <div className={styles.messageMetadataTalk}>
+        <span>{message.sendTime}</span>
+      </div>
+    </div>
+  );
+};
 
 const Chat = () => {
-  const [isOpenReportModal, setIsOpenReportModal] = useState<boolean>(false); // Report 모달 상태
-  const [messages, setMessages] = useState([
-    { id: 1, text: "안녕하세요, 어떻게 도와드릴까요?", sender: "other" },
-    { id: 2, text: "문의사항이 있어서요!", sender: "me" },
-    // 기타 예시 메시지 추가 가능
-  ]);
+  const chatBodyRef = useRef(null);
+  const [isOpenReportModal, setIsOpenReportModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const router = useRouter();
+  const [showChat, setShowChat] = useState(false);
+  const [token, setToken] = useState(null);
+  const { globalTicketUUID, userInfo, isLoading } = useUser();
+  const { chatMessages, sendMessage } = useWebSocket(
+    globalTicketUUID.chatRoomUUID
+  );
 
-  const goBack = () => {
-    router.back(); // 이전 페이지로 이동
+  useEffect(() => {
+    const tokenFromStorage = localStorage.getItem("Authorization");
+    setToken(tokenFromStorage);
+  }, []);
+
+  // 스크롤 아래로 이동하는 함수
+  const scrollToBottom = () => {
+    if (chatBodyRef.current) {
+      chatBodyRef.current.scrollTop = chatBodyRef.current.scrollHeight;
+    }
   };
 
-  const openReportModal = () => {
-    setIsOpenReportModal(true);
+  // 채팅 메시지가 업데이트될 때마다 스크롤 아래로 이동
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatMessages]);
+  if (isLoading || !globalTicketUUID || !userInfo) {
+    return <div>Loading...</div>;
+  }
+  // 메시지 전송 함수
+  const sendMSG = () => {
+    if (token) {
+      const message = {
+        accessToken: token,
+        chatRoomUUID: globalTicketUUID.chatRoomUUID,
+        message: inputValue,
+        isChatMessage: true,
+      };
+      sendMessage(message);
+      setInputValue("");
+    } else {
+      console.log("토큰이 없습니다. 로그인이 필요합니다.");
+    }
   };
 
-  const closeReportModal = () => {
-    setIsOpenReportModal(false);
-  };
-
-  const handleSend = () => {
-    if (inputValue.trim() === "") return;
-    const newMessage = {
-      id: messages.length + 1,
-      text: inputValue,
-      sender: "me",
-    };
-    setMessages([...messages, newMessage]);
-    setInputValue("");
-  };
+  // 다른 컴포넌트로 전환
+  if (showChat) {
+    return <TicketOwnerController />;
+  }
 
   return (
     <div className={styles.chatContainer}>
       <div className={styles.chatHeader}>
-        <button onClick={goBack} className={styles["btn-basic"]}>
+        <button
+          onClick={() => setShowChat(true)}
+          className={styles["btn-basic"]}
+        >
           뒤로가기
         </button>
-        <button onClick={openReportModal} className="btn-basic">
+        <button
+          onClick={() => setIsOpenReportModal(true)}
+          className="btn-basic"
+        >
           신고하기
         </button>
       </div>
-      <div className={styles.chatBody}>
-        {messages.map((message) => (
-          <div key={message.id} className={`message ${message.sender}`}>
-            <span className={styles.messageContent}>{message.text}</span>
-          </div>
+      <div className={styles.chatBody} ref={chatBodyRef}>
+        {chatMessages.map((msg, index) => (
+          <Message
+            key={index}
+            message={msg}
+            isCurrentUser={msg.nickname === userInfo.nickname}
+          />
         ))}
       </div>
       <div className={styles.chatFooter}>
@@ -61,22 +163,20 @@ const Chat = () => {
           className={styles.messageInput}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onKeyPress={(e) => e.key === "Enter" && handleSend()}
+          onKeyPress={(e) => e.key === "Enter" && sendMSG()}
         />
-        <button onClick={handleSend} className="btn-basic">
+        <button onClick={sendMSG} className="btn-basic">
           보내기
         </button>
       </div>
       <Modal
-        className={styles["modal-content"]}
         isOpen={isOpenReportModal}
-        onRequestClose={closeReportModal}
-        ariaHideApp={false}
+        onRequestClose={() => setIsOpenReportModal(false)}
+        className={styles["modal-content"]}
         overlayClassName={styles["modal-overlay"]}
+        ariaHideApp={false}
       >
-        <div className={styles["modal-inner-content"]}>
-          <ReportModal onReportClose={closeReportModal} />
-        </div>
+        <ReportModal onReportClose={() => setIsOpenReportModal(false)} />
       </Modal>
     </div>
   );

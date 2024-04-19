@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import styles from "./membershipTerms.module.css";
+import { usePoint } from "@/app/utils/ChargePointProvider";
 
 const TermsItem = ({
   question,
@@ -37,15 +38,16 @@ const TermsItem = ({
 };
 
 const PointChargeOption = () => {
+  const { onClickAddSub } = usePoint();
   const [isAgreed, setIsAgreed] = useState(false);
-  const [chargeAmount, setChargeAmount] = useState("");
+  const [chargeAmount] = useState(5900); // 충전 금액 상태 추가
 
   const handleAgree: () => void = () => {
     setIsAgreed(true);
   };
 
-  const handleAddAmount = (amount: number) => {
-    setChargeAmount((prev) => `${Number(prev) + amount}`);
+  const handlePaymentClick = () => {
+    onClickAddSub(chargeAmount);
   };
 
   const Terms = [
@@ -98,7 +100,11 @@ const PointChargeOption = () => {
       </div>
       <div className="MembershipInputContainer">
         <div className="MembershipInput">
-          <button className="btn-basic" disabled={!isAgreed}>
+          <button
+            className="btn-basic"
+            disabled={!isAgreed}
+            onClick={handlePaymentClick}
+          >
             시작하기
           </button>
         </div>

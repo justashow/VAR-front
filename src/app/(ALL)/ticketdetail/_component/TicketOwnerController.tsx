@@ -7,6 +7,9 @@ import Meet from "./Meet";
 import ReportModal from "./ReportModal";
 import ReviewModal from "./ReviewModal";
 import Link from "next/link";
+import Chat from "../../chat/_component/Chat";
+import axios from "axios";
+import { useUser } from "@/app/utils/UserProvider";
 //---------------------------------------------------------------- 알림 열고 닫기
 const FaqItem = ({
   question,
@@ -40,6 +43,7 @@ const TicketOwnerController = () => {
   const [meetingInProgress, setMeetingInProgress] = useState(false);
   const [showReviewButton, setShowReviewButton] = useState(false);
   const [reviewWritten, setReviewWritten] = useState(false); // 후기 작성 상태
+  const [showChat, setShowChat] = useState(false);
   //----------------------------------------------------------------
   //----------------------------------------------------------------알림 열고 닫기 내용
   const faqs = [
@@ -101,6 +105,9 @@ const TicketOwnerController = () => {
   ];
 
   //----------------------------------------------------------------
+  const toggleChat = () => {
+    setShowChat(true);
+  };
 
   const closeReviewModal = () => {
     setIsOpenReviewModal(false);
@@ -145,6 +152,101 @@ const TicketOwnerController = () => {
 
   //----------------------------------------------------------------
   const timerId = useRef<NodeJS.Timeout | null>(null);
+  const { globalTicketUUID } = useUser();
+  const checkingMeeting = async () => {
+    if (!globalTicketUUID) {
+      console.error("globalTicketUUID is not available.");
+      return;
+    }
+    try {
+      const token = localStorage.getItem("Authorization");
+      const response = await axios.get(
+        `${process.env.BASE_URL}/api/ticket/checkTime/${globalTicketUUID}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200) {
+        startMeeting();
+        console.log(response);
+      } else {
+        console.error("Failed to submit report");
+      }
+    } catch (error) {
+      console.error("'만났어요' 버튼에 대한 API 호출 중 예외 발생:", error);
+      setMeetingInProgress(false); // 버튼 활성화 상태 복원
+      if (error.response.data.code === "6201") {
+        alert(
+          "아직 상대방이 만남시작을 하지 않았습니다. 시작하면 새로고침을 해주세요"
+        );
+      }
+    }
+  };
+
+  const handleMetButtonClick = async () => {
+    if (!globalTicketUUID) {
+      console.error("globalTicketUUID is not available.");
+      return;
+    }
+    setMeetingInProgress(true);
+    try {
+      const token = localStorage.getItem("Authorization");
+      const currentIsoTime = new Date().toISOString();
+      const response = await axios.post(
+        `${process.env.BASE_URL}/api/ticket/checkTime`,
+        { ticketUUID: globalTicketUUID },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200) {
+        startMeeting();
+        console.log(response);
+        checkingMeeting();
+      } else {
+        console.error("Failed to submit report");
+      }
+    } catch (error) {
+      console.error("'만났어요' 버튼에 대한 API 호출 중 예외 발생:", error);
+      setMeetingInProgress(false); // 버튼 활성화 상태 복원
+    }
+  };
+
+  const startMeetingWithTimer = (startMeetingTime) => {
+    // 타이머를 시작하는 로직
+    const startTime = new Date(startMeetingTime).getTime();
+    const currentTime = Date.now();
+    const remainingTime = startTime > currentTime ? startTime - currentTime : 0;
+
+    setMeetingInProgress(true);
+    setIsOpenMeetModal(false); // 모달 닫기
+
+    // 기존 타이머가 있으면 클리어
+    if (timerId.current) {
+      clearInterval(timerId.current);
+    }
+
+    // 카운트다운 시작
+    timerId.current = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        const updatedTime = prevTime - 1000;
+        if (updatedTime <= 0) {
+          // 타이머가 0이 되면, 후기 쓰기 버튼을 보이게 하고 타이머 정지
+          setShowReviewButton(true);
+          clearInterval(timerId.current);
+          timerId.current = null;
+          setMeetingInProgress(false);
+          return 0;
+        }
+        return updatedTime;
+      });
+    }, 1000);
+
+    setTimeLeft(remainingTime); // remainingTime으로 타이머 초기 설정
+  };
+  console.log(globalTicketUUID);
+
+  useEffect(() => {
+    if (globalTicketUUID) {
+      checkingMeeting();
+    }
+  }, [globalTicketUUID]);
 
   const startMeeting = () => {
     setMeetingInProgress(true);
@@ -182,7 +284,9 @@ const TicketOwnerController = () => {
     setReviewWritten(true); // 후기 작성 완료 상태로 업데이트
   };
   //----------------------------------------------------------------
-
+  if (showChat) {
+    return <Chat />;
+  }
   //----------------------------------------------------------------
   return (
     <div className={styles.TicketControllerWrapper}>
@@ -203,7 +307,7 @@ const TicketOwnerController = () => {
           {!showReviewButton && !reviewWritten && (
             <button
               className="btn-basic"
-              onClick={openMeetModal}
+              onClick={handleMetButtonClick}
               disabled={meetingInProgress}
             >
               {meetingInProgress ? "만나는 중..." : "만났어요"}
@@ -222,13 +326,18 @@ const TicketOwnerController = () => {
           <button className="btn-basic" onClick={openReportModal}>
             신고
           </button>
+          <button className="btn-basic" onClick={openReviewModal}>
+            후기 쓰기
+          </button>
         </div>
         <div>
-          <Link href="/chat">
-            <button className="btn-basic" disabled={reviewWritten}>
-              채팅하기
-            </button>
-          </Link>
+          <button
+            className="btn-basic"
+            disabled={reviewWritten}
+            onClick={toggleChat}
+          >
+            채팅하기
+          </button>
         </div>
 
         <Modal

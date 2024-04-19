@@ -1,6 +1,6 @@
 import Faq from "./_component/Faq";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <Faq />
@@ -8,4 +8,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

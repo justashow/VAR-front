@@ -1,11 +1,14 @@
+import { ChargePointProvider } from "@/app/utils/ChargePointProvider";
 import MembershipTerms from "./_component/MembershipTerms";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
-      <MembershipTerms />
+      <ChargePointProvider>
+        <MembershipTerms />
+      </ChargePointProvider>
     </div>
   );
 };
 
-export default page;
+export default Page;

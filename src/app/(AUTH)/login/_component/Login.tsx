@@ -9,8 +9,7 @@ import { useRouter } from "next/navigation";
 export default function Login() {
   const router = useRouter(); // useRouter 훅 사용
   const onClick = () => {
-    window.location.href =
-      "https://won-backserver.kro.kr:8081/oauth2/authorization/kakao";
+    window.location.href = `${process.env.BASE_URL}/oauth2/authorization/kakao`;
   };
 
   return (

@@ -1,28 +1,49 @@
-import Link from "next/link";
-import MyPageAuctionBox from "./MyPageAuctionBox";
 import MyPageMenu from "../../../_component/Menu/MyPageMenu";
 import styles from "./myPageAuction.module.css";
+import UserAuctionRecommends from "./UserAuctionRecommends";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { SearchProvider, useSearch } from "./SearchProvider";
+import { getUserAuctionRecommends } from "../_lib/getUserAuctionRecommends";
+import SortButton from "./SortButton";
 
-const MyPageAuction = () => {
+export default function MyPageAuction() {
   return (
     <div>
       <div>
         <MyPageMenu />
       </div>
-      <div className={styles["Auction-menu"]}>
-        <div className={styles["Auction-btn"]}>
-          <Link href="/userauction/proceeding">
-            <button className="btn-basic">참여중인 경매</button>
-          </Link>
-          <Link href="/userauction/successful-bid">
-            <button className="btn-basic">낙찰받은 경매</button>
-          </Link>
-        </div>
-      </div>
-      <MyPageAuctionBox />
-      <div>페이지 네이션 이동</div>
+      <HydrationBoundary>
+        <SearchProvider>
+          <div className={styles["Auction-menu"]}>
+            <div className={styles["Auction-btn"]}>
+              <SortButton />
+            </div>
+          </div>
+          <UserAuctionRecommends />
+        </SearchProvider>
+      </HydrationBoundary>
     </div>
   );
-};
+}
 
-export default MyPageAuction;
+export async function getServerSideProps(context) {
+  const { query } = context;
+  const sort = query.sort || "defaultSort";
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchInfiniteQuery({
+    queryKey: ["UserMyPageAuction", sort],
+    queryFn: () => getUserAuctionRecommends({ sort }),
+    initialPageParam: 0,
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}

@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import Chat from "./_component/Chat";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <Chat />
@@ -9,4 +11,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

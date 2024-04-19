@@ -2,10 +2,8 @@
 
 import { ChangeEvent, useState } from "react";
 import styles from "./withDrawTerms.module.css";
-
-const user = {
-  points: 5000000,
-};
+import { useUser } from "@/app/utils/UserProvider";
+import { usePoint } from "@/app/utils/ChargePointProvider";
 
 const banks: string[] = [
   "KB국민은행",
@@ -49,14 +47,17 @@ const TermsItem = ({
 };
 
 const WithDrawTerms = () => {
+  const { userInfo } = useUser();
+  const { withdrawOrder } = usePoint();
   const [isAgreed, setIsAgreed] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState(""); // 출금 금액 상태
   const [bank, setBank] = useState(""); // 은행 상태
   const [accountNumber, setAccountNumber] = useState(""); // 계좌번호 상태
+  const [accountHolder, setAccountHolder] = useState(""); // 계좌번호 상태
 
-  // const handleAgree: () => void = () => {
-  //   setIsAgreed(true); // 동의 시 상태 업데이트
-  // };
+  if (!userInfo) {
+    return <div>Loading or not logged in...</div>;
+  }
 
   // 출금할 금액을 누적하는 함수
   const handleAddAmount = (amount: number) => {
@@ -64,7 +65,7 @@ const WithDrawTerms = () => {
       const prevAmount = Number(prev) || 0; // 이전 금액이 없으면 0으로 처리
       const newAmount = prevAmount + amount;
       // 새로운 금액이 사용자의 포인트를 초과하지 않도록 검사
-      if (newAmount <= user.points) {
+      if (newAmount <= userInfo.point) {
         return newAmount.toString(); // 새로운 금액을 문자열로 변환하여 반환
       }
       return prev; // 사용자의 포인트를 초과하는 경우, 이전 금액을 유지
@@ -73,17 +74,21 @@ const WithDrawTerms = () => {
 
   // "전액" 버튼 클릭 시 사용자 포인트 전체를 출금 금액으로 설정
   const handleFullAmount = () => {
-    setWithdrawAmount(user.points.toString());
+    setWithdrawAmount(userInfo.point.toString());
   };
 
   const handleWithdrawAmountChange = (e: ChangeEvent<HTMLInputElement>) => {
     const inputAmount = Number(e.target.value);
-    if (inputAmount <= user.points) {
+    if (inputAmount <= userInfo.point) {
       // 사용자가 입력한 금액이 사용자의 포인트보다 같거나 작을 때만 상태를 업데이트
       setWithdrawAmount(e.target.value);
     } else {
-      setWithdrawAmount(user.points.toString()); // 그렇지 않으면, 사용자의 최대 포인트로 설정
+      setWithdrawAmount(userInfo.point.toString()); // 그렇지 않으면, 사용자의 최대 포인트로 설정
     }
+  };
+
+  const handleWithdrawOrder = () => {
+    withdrawOrder(bank, accountNumber, accountHolder, withdrawAmount);
   };
 
   const canSubmit = isAgreed && bank && accountNumber && withdrawAmount;
@@ -141,9 +146,19 @@ const WithDrawTerms = () => {
             ))}
           </select>
 
-          <div>계좌번호를 입력해주세요</div>
+          <div>예금주을 입력해주세요</div>
           <input
             type="text"
+            placeholder="예금주를 입력해주세요"
+            value={accountHolder}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setAccountHolder(e.target.value)
+            }
+          />
+
+          <div>계좌번호를 입력해주세요</div>
+          <input
+            type="number"
             placeholder="계좌번호를 입력해주세요"
             value={accountNumber}
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -154,7 +169,7 @@ const WithDrawTerms = () => {
           <input
             type="number"
             placeholder="출금 가능한 포인트"
-            value={user.points}
+            value={userInfo.point}
             readOnly
           />
           <div>출금할 포인트</div>
@@ -165,7 +180,11 @@ const WithDrawTerms = () => {
             onChange={handleWithdrawAmountChange}
           />
         </div>
-        <button className="btn-basic" disabled={!canSubmit}>
+        <button
+          className="btn-basic"
+          disabled={!canSubmit}
+          onClick={handleWithdrawOrder}
+        >
           출금신청하기
         </button>
 

@@ -3,12 +3,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  max-width: 1280px;
-  background-color: brown;
+  width: 1920px;
+  height: 80px;
+  flex-shrink: 0;
+  background: var(--FFF, #fff);
   width: 100%;
   margin: 0 auto;
   color: white;
-  position: sticky;
+  position: fixed;
   top: 0; /* 화면 상단에 붙습니다 */
   z-index: 998; /* 다른 요소들보다 앞에 오도록 z-index 설정 */
 }
@@ -29,42 +31,38 @@
 }
 
 /* 모달 오버레이 스타일 */
-.modal-overlay {
+.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 999; /* .modal-content보다 낮아야 함 */
+  z-index: 1050; /* 모달 컨텐츠보다 낮아야 함 */
   background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* 모달 콘텐츠 스타일 */
-.modal-content {
+.modalContent {
   position: fixed;
   top: 50%;
   left: 50%;
-  right: auto;
-  bottom: auto;
-  margin-right: -50%;
   transform: translate(-50%, -50%);
-  width: 500px;
-  max-height: 90%;
+  max-width: 90%; /* 화면 크기에 따라 최대 너비 조정 */
+  max-height: 90vh; /* 화면 크기에 따라 최대 높이 조정 */
   padding: 20px;
-  overflow: auto;
+  overflow-y: auto; /* 컨텐츠가 많을 경우 스크롤 */
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid #ccc;
-  z-index: 1000;
+  z-index: 1060; /* 오버레이보다 높아야 함 */
 }
 
 /* 내부 콘텐츠 중앙 정렬을 위한 스타일 */
-.modal-inner-content {
+.modalInnerContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 100%;
 }

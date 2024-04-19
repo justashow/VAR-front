@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { ReactQueryClientProvider } from "./utils/ReactQueryClientProvider";
 import { UserProvider } from "./utils/UserProvider";
+import { VipProvider } from "./utils/VipProvider";
+import { AddAuctionsProvider } from "./utils/AddAuctionsProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <UserProvider>
-        <body className={inter.className}>
-          <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
-        </body>
-      </UserProvider>
+      <AddAuctionsProvider>
+        <VipProvider>
+          <UserProvider>
+            <body className={inter.className}>
+              <ReactQueryClientProvider>{children}</ReactQueryClientProvider>
+            </body>
+          </UserProvider>
+        </VipProvider>
+      </AddAuctionsProvider>
     </html>
   );
 }

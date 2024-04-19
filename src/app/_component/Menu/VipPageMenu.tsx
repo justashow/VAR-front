@@ -10,7 +10,7 @@ const VipPageMenu = () => {
       <Link href="/vipreview">
         <button className="btn-basic">VIP 리뷰</button>
       </Link>
-      <Link href="/vipauction/proceeding">
+      <Link href="/vipauction">
         <button className="btn-basic">진행중인 경매</button>
       </Link>
     </div>

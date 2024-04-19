@@ -1,47 +1,112 @@
 import React, { useState } from "react";
+import AWS from "aws-sdk";
 import styles from "./reportModal.module.css";
-const ReportModal = ({ onReportClose }: { onReportClose: any }) => {
-  // 상태를 사용하여 선택된 파일 정보를 저장
-  const [selectedFile, setSelectedFile] = useState(null);
+import axios from "axios";
+import { useUser } from "@/app/utils/UserProvider";
 
-  // 파일이 선택되었을 때 실행될 핸들러
-  const handleFileChange = (event: any) => {
-    // 선택된 파일이 있으면, 상태를 업데이트
-    if (event.target.files[0]) {
-      setSelectedFile(event.target.files[0]);
-    } else {
-      setSelectedFile(null);
+const REGION = process.env.AWS_S3_BUCKET_REGION; // AWS S3 버킷 리전
+const ACCESS_KEY = process.env.AWS_S3_BUCKET_ACCESS_KEY_ID; // AWS S3 액세스 키
+const SECRET_ACCESS_KEY = process.env.AWS_S3_BUCKET_SECRET_ACCESS_KEY; // AWS S3 비밀 액세스 키
+
+const ReportModal = ({ onReportClose }) => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fileUrl, setFileUrl] = useState(""); // S3에서 파일 URL을 저장하기 위한 상태
+  const { globalTicketUUID } = useUser();
+  const [ticketInfo, setTicketInfo] = useState({
+    ticketReportContent: "",
+  });
+
+  AWS.config.update({
+    region: REGION,
+    accessKeyId: ACCESS_KEY,
+    secretAccessKey: SECRET_ACCESS_KEY,
+  });
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0]; // 직접 파일 객체 참조
+    setSelectedFile(file);
+
+    if (file) {
+      try {
+        // 파일 업로드 로직
+        const upload = new AWS.S3.ManagedUpload({
+          params: {
+            ACL: "public-read",
+            Bucket: "varwonimgbucket",
+            Key: `upload/${Date.now()}-${file.name}`, // 파일 이름 설정을 보다 유니크하게 조정
+            Body: file,
+          },
+        });
+
+        const result = await upload.promise();
+
+        setFileUrl(result.Location); // 업로드된 파일의 URL을 상태에 저장
+      } catch (error) {
+        console.error("File upload error:", error);
+        onReportClose(); // 오류 발생 시에도 모달 닫기
+      }
     }
   };
 
-  // 폼 제출 핸들러
-  const handleSubmit = (event: any) => {
-    event.preventDefault(); // 폼 제출의 기본 동작 방지
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setTicketInfo((prev) => ({ ...prev, [name]: value }));
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    // FormData 객체를 사용하여 파일 데이터 포함
-    const formData = new FormData();
-    if (selectedFile) {
-      formData.append("photo", selectedFile);
+    // 파일이 선택되지 않았거나 업로드 URL이 설정되지 않은 경우 함수를 종료합니다.
+    if (!selectedFile || !fileUrl) {
+      console.error("No file selected or file URL not set.");
+      return;
     }
 
-    // 추가 데이터 필드가 있다면 formData에 추가
-    // 예: formData.append("otherField", value);
+    try {
+      const token = localStorage.getItem("Authorization");
 
-    // formData를 사용하여 서버에 파일 및 다른 데이터 제출
-    // 예: axios.post('/api/upload', formData, config)
-    console.log("Form submitted", formData);
+      // API 요청 부분
+      const response = await axios.post(
+        `${process.env.BASE_URL}/api/ticket/report`,
+        {
+          ticketUUID: globalTicketUUID,
+          ticketReportContent: ticketInfo.ticketReportContent,
+          ticketReportEvidenceUrl: fileUrl,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.status === 200) {
+        onReportClose(); // 모달 닫기 함수 호출
+      }
+    } catch (error) {
+      console.error("API submission error:", error);
+      onReportClose(); // 오류 발생 시에도 모달 닫기
+    }
   };
 
   return (
-    <div>
-      <div>유명인과의 만남이 불편하셨나요?</div>
+    <div className={styles.ReportModal}>
+      <div className={styles.ReportHeader}>유명인과의 만남이 불편하셨나요?</div>
       <form onSubmit={handleSubmit} className={styles.ReportContainer}>
-        <input type="file" onChange={handleFileChange} />
-        <input type="text" />
-        <button type="submit" className="btn-basic" onClick={onReportClose}>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          className={styles.ReportInput}
+        />
+        <input
+          type="text"
+          name="ticketReportContent" // state에 맞는 name 속성 추가
+          value={ticketInfo.ticketReportContent} // input 값이 state를 반영하도록 value 속성 추가
+          placeholder="추가 정보 입력"
+          onChange={handleInputChange} // input 값 변경을 handleInputChange 함수로 처리
+          className={styles.ReportInput}
+        />
+        <button type="submit" className={styles.ReportButton}>
           제출
         </button>
       </form>
+      <button onClick={onReportClose} className={styles.ReportCloseButton}>
+        닫기
+      </button>
     </div>
   );
 };

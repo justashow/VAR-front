@@ -1,27 +1,80 @@
 .VipPrContainer {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 900px;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+}
+
+.VipPrText {
   width: 100%;
-  height: 700px;
-  margin: 20px auto;
-  border: 1px solid black;
+  padding: 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  resize: none;
+  min-height: 300px;
+}
+
+.VipPrText::placeholder {
+  color: #888;
+}
+
+.VipPrText:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.VipPrText:disabled {
+  color: #6c757d;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  cursor: not-allowed;
+}
+
+.VipPrInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  resize: none;
+}
+
+.VipPrInput::placeholder {
+  color: #888;
+}
+
+.VipPrInput:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.VipPrInput:disabled {
+  color: #6c757d;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  cursor: not-allowed;
 }
 
 .PrButtonContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 20px;
-  max-width: 900px;
-  margin: 20px auto;
+  margin-top: 20px;
+  margin-left: auto;
+  align-self: flex-end;
 }
 
-.VipPrTextarea {
-  width: 100%;
-  height: 700px;
-  box-sizing: border-box;
+.FormContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }

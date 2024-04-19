@@ -1,5 +1,7 @@
 "use client";
 
+import axios from "axios";
+
 export async function getVipListRecommends({
   pageParam = 0,
   searchQuery = "",
@@ -7,16 +9,20 @@ export async function getVipListRecommends({
   pageParam?: number;
   searchQuery?: string;
 }) {
-  const searchPart: string = searchQuery ? `&search=${searchQuery}` : "";
-  const url = `https://won-backserver.kro.kr:8081/api/all/vipList?page=${pageParam}&size=10${searchPart}`;
+  const encodedSearchQuery = encodeURIComponent(searchQuery);
+  const searchPart = encodedSearchQuery ? `&search=${encodedSearchQuery}` : "";
 
-  const res: Response = await fetch(url, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!res.ok) {
+  const url = `${process.env.BASE_URL}/api/all/vipList?page=${pageParam}&size=10${searchPart}`;
+
+  try {
+    const response = await axios.get(url, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error.response ? error.response.data : error.message);
     throw new Error("Failed to fetch data");
   }
-  return res.json();
 }

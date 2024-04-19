@@ -1,13 +1,19 @@
 import AddAuctionForm from "./_component/AddAuctionForm";
 import AddAuctionWarning from "./_component/AddAuctionWarning";
+import { UserProvider } from "@/app/utils/UserProvider";
+import { AddAuctionsProvider } from "@/app/utils/AddAuctionsProvider";
 
-const page = () => {
+const Page = () => {
   return (
     <div>
       <AddAuctionWarning />
-      <AddAuctionForm />
+      <UserProvider>
+        <AddAuctionsProvider>
+          <AddAuctionForm />
+        </AddAuctionsProvider>
+      </UserProvider>
     </div>
   );
 };
 
-export default page;
+export default Page;
