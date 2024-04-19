@@ -3,7 +3,7 @@
 import axios from "axios";
 
 export async function getVipReviewRecommends({ sort }: { sort?: string }) {
-  const url = `${process.env.BASE_URL}/api/user/review/${sort}`;
+  const url = `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/review/${sort}`;
   const token = localStorage.getItem("Authorization");
   console.log(sort);
 

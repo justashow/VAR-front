@@ -31,7 +31,7 @@ const AuctionPlayModal = ({ closeModal, VipInfo }) => {
   );
 
   //--------------------------------------------------------
-  const baseurl = process.env.WS_PROXY;
+  const baseurl = process.env.NEXT_PUBLIC_WS_PROXY;
   const token = localStorage.getItem("Authorization");
   //----------------------------------------------------------------
   function calculateNewBid(currentBid) {

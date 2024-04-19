@@ -22,7 +22,7 @@ function Oauth() {
       try {
         // 카카오 OAuth 서버로부터 액세스 토큰을 요청합니다.
         const response = await axios.post(
-          `${process.env.BASE_URL}/api/auth/oauth2/accessKakao`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/oauth2/accessKakao`,
           { code },
           { withCredentials: true }
         );

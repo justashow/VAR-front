@@ -7,7 +7,7 @@ import TicketOwnerController from "../../ticketdetail/_component/TicketOwnerCont
 import { useUser } from "@/app/utils/UserProvider";
 
 // 환경 변수 한 번만 참조하기
-const WS_PROXY = process.env.WS_PROXY;
+const NEXT_PUBLIC_WS_PROXY = process.env.NEXT_PUBLIC_WS_PROXY;
 
 const useWebSocket = (chatRoomUUID) => {
   const webSocket = useRef(null);
@@ -20,7 +20,7 @@ const useWebSocket = (chatRoomUUID) => {
     }
 
     const token = localStorage.getItem("Authorization");
-    const ws = new WebSocket(`${WS_PROXY}wss/chat`);
+    const ws = new WebSocket(`${NEXT_PUBLIC_WS_PROXY}wss/chat`);
     const enterMsg = {
       accessToken: token,
       chatRoomUUID: chatRoomUUID,

@@ -9,7 +9,7 @@ export async function getUserAuctionRecommends({
   sort?: string[];
 }): Promise<ApiResponse> {
   const token = localStorage.getItem("Authorization");
-  const baseUrl = process.env.BASE_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   try {
     let apiResponse: ApiResponse;
 

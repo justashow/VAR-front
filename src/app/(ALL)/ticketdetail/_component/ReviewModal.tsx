@@ -25,7 +25,7 @@ const ReviewModal = ({ onReViewClose, handleWriteReview }) => {
 
       // API 요청 부분
       const response = await axios.post(
-        `${process.env.BASE_URL}/api/ticket/review`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/ticket/review`,
         {
           ticketUUID: globalTicketUUID,
           reviewContent: review,

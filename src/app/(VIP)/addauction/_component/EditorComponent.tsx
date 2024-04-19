@@ -7,9 +7,10 @@ import React, { useMemo, useRef, useState } from "react";
 import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
 import AWS from "aws-sdk";
 
-const REGION = process.env.AWS_S3_BUCKET_REGION;
-const ACCESS_KEY = process.env.AWS_S3_BUCKET_ACCESS_KEY_ID;
-const SECRET_ACCESS_KEY = process.env.AWS_S3_BUCKET_SECRET_ACCESS_KEY;
+const REGION = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_REGION;
+const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_ACCESS_KEY_ID;
+const SECRET_ACCESS_KEY =
+  process.env.NEXT_PUBLIC_AWS_S3_BUCKET_SECRET_ACCESS_KEY;
 
 const EditorComponent = () => {
   const ReactQuill =
@@ -99,10 +100,10 @@ export default EditorComponent;
 // import ReactQuill from "react-quill";
 // import AWS from "aws-sdk";
 // import { useAddAuction } from "@/app/utils/AddAuctionsProvider";
-// const REGION = process.env.AWS_S3_BUCKET_REGION;
-// const ACCESS_KEY = process.env.AWS_S3_BUCKET_ACCESS_KEY_ID;
+// const REGION = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_REGION;
+// const ACCESS_KEY = process.env.NEXT_PUBLIC_AWS_S3_BUCKET_ACCESS_KEY_ID;
 // const SECRET_ACCESS_KEY =
-//   process.env.AWS_S3_BUCKET_SECRET_ACCESS_KEY;
+//   process.env.NEXT_PUBLIC_AWS_S3_BUCKET_SECRET_ACCESS_KEY;
 // const EditorComponent = () => {
 //   const quillRef = useRef(null);
 //   const [contents, setContents] = useState("");

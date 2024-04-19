@@ -27,7 +27,7 @@ const ReportModal = ({ onReportClose }: { onReportClose: () => void }) => {
       try {
         const token = localStorage.getItem("Authorization");
         const response = await axios.post(
-          `${process.env.BASE_URL}/api/chat/report`,
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat/report`,
           reportData,
           { headers: { Authorization: `Bearer ${token}` } }
         );

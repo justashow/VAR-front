@@ -4,6 +4,7 @@ import { truncateSync } from "fs";
 const nextConfig = {
   images: {
     domains: ["k.kakaocdn.net", "t1.kakaocdn.net"],
+    unoptimized: true,
   },
   reactStrictMode: false,
   output: "standalone",
