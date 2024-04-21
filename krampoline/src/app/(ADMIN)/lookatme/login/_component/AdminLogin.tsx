@@ -32,7 +32,7 @@ export default function AdminLogin() {
           response.headers["authorization"];
         const accessToken = authHeader?.substring("Bearer ".length);
         if (accessToken) {
-          localStorage.setItem("AdminAuth", accessToken);
+          localStorage.setItem("Authorization", accessToken);
           router.push("/lookatme/vipinfo");
         }
       }

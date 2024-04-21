@@ -15,13 +15,12 @@ interface BannerEditData {
   targetUrl: string;
 }
 
-const page = () => {
-  const token = localStorage.getItem("AdminAuth");
+const Page = () => {
   const [banners, setBanners] = useState<BannerEditData[]>([]);
 
   useEffect(() => {
     fetchBannerEdit();
-  }, [token]);
+  }, []);
 
   // 배너 데이터 불러오기
   async function fetchBannerEdit() {
@@ -104,4 +103,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

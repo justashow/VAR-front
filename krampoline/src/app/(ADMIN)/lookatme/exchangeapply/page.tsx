@@ -28,8 +28,7 @@ interface Page<T> {
   number: number; // 현재 페이지 번호
 }
 
-const page = () => {
-  const token = localStorage.getItem("AdminAuth");
+const Page = () => {
   const [page, setPage] = useState<Page<ExchangeApplyData>>({
     content: [],
     totalPages: 0,
@@ -159,4 +158,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
